@@ -1,0 +1,7 @@
+.project
+.settings
+*.ipa
+*.stamp
+*.swf
+*.tmp
+bin/GooglePlusANE.app.dSYM/Contents/Info.plist
