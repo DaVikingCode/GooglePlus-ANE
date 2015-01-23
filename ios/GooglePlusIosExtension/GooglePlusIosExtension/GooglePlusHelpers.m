@@ -31,14 +31,24 @@
 
 - (void)finishedWithAuth:(GTMOAuth2Authentication *)auth error:(NSError *)error {
     
-    NSLog(@"Received error %@ and auth object %@",error, auth);
+    if (error)
+        NSLog(@"login failed");
+    
+    else if ([[GPPSignIn sharedInstance] authentication]) {
+        
+        NSLog(@"login success");
+        
+        id<GPPShareBuilder> shareBuilder = [[GPPShare sharedInstance] shareDialog];
+        
+        [shareBuilder setURLToShare:[NSURL URLWithString:@"https://www.example.com/restaurant/sf/1234567/"]];
+        [shareBuilder open];
+    }
 }
 
 - (BOOL)application: (UIApplication *)application openURL: (NSURL *)url sourceApplication: (NSString *)sourceApplication annotation: (id)annotation {
     
-    NSLog(@"here 1 ?");
-    
-    return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
+    // will be overrided in Main file.
+    return false;
 }
 
 @end
