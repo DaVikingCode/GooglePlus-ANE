@@ -16,11 +16,16 @@
 
 GooglePlusHelpers *googlePlusHelpers;
 
-DEFINE_ANE_FUNCTION(init) {
+DEFINE_ANE_FUNCTION(login) {
     
-    googlePlusHelpers = [[GooglePlusHelpers alloc] init];
+    uint32_t stringLength;
+    const uint8_t *key;
     
-    [googlePlusHelpers login];
+    FREGetObjectAsUTF8(argv[0], &stringLength, &key);
+    
+    googlePlusHelpers = [[GooglePlusHelpers alloc] initWithContext:context];
+    
+    [googlePlusHelpers loginWithKey:[NSString stringWithUTF8String:(char*) key]];
     
     return NULL;
 }
@@ -55,7 +60,7 @@ void GooglePlusContextInitializer(void* extData, const uint8_t* ctxType, FRECont
     object_setClass(delegate, modDelegate);
     
     static FRENamedFunction functionMap[] = {
-        MAP_FUNCTION(init, NULL )
+        MAP_FUNCTION(login, NULL )
     };
     
     *numFunctionsToSet = sizeof( functionMap ) / sizeof( FRENamedFunction );

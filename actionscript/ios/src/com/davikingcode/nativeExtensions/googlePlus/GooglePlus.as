@@ -1,6 +1,7 @@
 package com.davikingcode.nativeExtensions.googlePlus {
 
 	import flash.events.EventDispatcher;
+	import flash.events.StatusEvent;
 	import flash.external.ExtensionContext;
 
 	public class GooglePlus extends EventDispatcher {
@@ -22,11 +23,38 @@ package com.davikingcode.nativeExtensions.googlePlus {
 			if (!extensionContext)
 				throw new Error( "GooglePlus native extension is not supported on this platform." );
 
+			extensionContext.addEventListener(StatusEvent.STATUS, _onStatus);
 		}
 
-		public function init():void {
+		private function _onStatus(sEvt:StatusEvent):void {
 
-			extensionContext.call("init");
+			switch (sEvt.code) {
+
+				case GooglePlusEvent.LOGIN_FAILED:
+					dispatchEvent(new GooglePlusEvent(GooglePlusEvent.LOGIN_FAILED));
+					break;
+
+				case GooglePlusEvent.LOGIN_SUCCESSED:
+					dispatchEvent(new GooglePlusEvent(GooglePlusEvent.LOGIN_SUCCESSED));
+					break;
+
+				case GooglePlusEvent.POST_SHARED:
+					dispatchEvent(new GooglePlusEvent(GooglePlusEvent.POST_SHARED));
+					break;
+
+				case GooglePlusEvent.POST_NOT_SHARED:
+					dispatchEvent(new GooglePlusEvent(GooglePlusEvent.POST_NOT_SHARED));
+					break;
+
+				case GooglePlusEvent.DISCONNECTED:
+					dispatchEvent(new GooglePlusEvent(GooglePlusEvent.DISCONNECTED));
+					break;
+			}
+		}
+
+		public function login(key:String):void {
+
+			extensionContext.call("login", key);
 		}
 
 	}

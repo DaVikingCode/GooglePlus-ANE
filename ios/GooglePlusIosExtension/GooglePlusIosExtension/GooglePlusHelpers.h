@@ -7,15 +7,23 @@
 //
 
 #import <GooglePlus/GooglePlus.h>
+#import "FlashRuntimeExtensions.h"
 
 @class GTMOAuth2Authentication;
 
-@interface GooglePlusHelpers : NSObject <GPPSignInDelegate>
+@interface GooglePlusHelpers : NSObject <GPPSignInDelegate, GPPShareDelegate> {
+    
+    FREContext ctx;
+}
 
-- (void) login;
+- (id) initWithContext:(FREContext) context;
+
+- (void) loginWithKey:(NSString *) key;
 
 - (void) signOut;
 
 - (void) disconnect;
+
+- (void) dispatchEvent:(NSString *) event withParams:(NSString * ) params;
 
 @end

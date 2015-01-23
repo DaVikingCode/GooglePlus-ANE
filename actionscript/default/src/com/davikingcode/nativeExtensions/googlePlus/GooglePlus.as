@@ -16,8 +16,7 @@ package com.davikingcode.nativeExtensions.googlePlus {
 			_instance = this;
 		}
 
-		public function init():void {
-
+		public function login(key:String):void {
 		}
 
 	}
