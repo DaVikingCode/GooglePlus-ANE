@@ -22,7 +22,6 @@
 		B0871E8D1A5D8B870054509A /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0871E8B1A5D8B870054509A /* GoogleOpenSource.framework */; };
 		B0871E8E1A5D8B870054509A /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0871E8C1A5D8B870054509A /* GooglePlus.framework */; };
 		B0871E921A5D8F720054509A /* GooglePlusHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = B0871E911A5D8F720054509A /* GooglePlusHelpers.m */; };
-		B0C906BB1A72AC1300FCD01F /* GooglePlus.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = B0C906BA1A72AB9500FCD01F /* GooglePlus.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,7 +31,6 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				B0C906BB1A72AC1300FCD01F /* GooglePlus.bundle in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,7 +55,6 @@
 		B0871E8C1A5D8B870054509A /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
 		B0871E901A5D8F720054509A /* GooglePlusHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GooglePlusHelpers.h; sourceTree = "<group>"; };
 		B0871E911A5D8F720054509A /* GooglePlusHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GooglePlusHelpers.m; sourceTree = "<group>"; };
-		B0C906BA1A72AB9500FCD01F /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +112,6 @@
 		B0871E761A5D8AFF0054509A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B0C906BA1A72AB9500FCD01F /* GooglePlus.bundle */,
 				B0871E8B1A5D8B870054509A /* GoogleOpenSource.framework */,
 				B0871E8C1A5D8B870054509A /* GooglePlus.framework */,
 				B0871E891A5D8B6B0054509A /* UIKit.framework */,

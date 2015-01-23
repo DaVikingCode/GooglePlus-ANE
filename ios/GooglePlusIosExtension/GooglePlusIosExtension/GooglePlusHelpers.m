@@ -38,17 +38,38 @@
         
         NSLog(@"login success");
         
-        id<GPPShareBuilder> shareBuilder = [[GPPShare sharedInstance] shareDialog];
+        id<GPPShareBuilder> shareBuilder = [[GPPShare sharedInstance] nativeShareDialog];//[[GPPShare sharedInstance] shareDialog];
         
         [shareBuilder setURLToShare:[NSURL URLWithString:@"https://www.example.com/restaurant/sf/1234567/"]];
         [shareBuilder open];
     }
 }
 
-- (BOOL)application: (UIApplication *)application openURL: (NSURL *)url sourceApplication: (NSString *)sourceApplication annotation: (id)annotation {
+- (void) signOut {
+    
+    [[GPPSignIn sharedInstance] signOut];
+}
+
+- (void) disconnect {
+    
+    [[GPPSignIn sharedInstance] disconnect];
+}
+
+- (void)didDisconnectWithError:(NSError *)error {
+    
+    if (error) {
+        NSLog(@"Received error %@", error);
+        
+    } else {
+        
+        NSLog(@"User is disconnected and the application isn't linked anymore to Google+");
+    }
+}
+
+/*- (BOOL)application: (UIApplication *)application openURL: (NSURL *)url sourceApplication: (NSString *)sourceApplication annotation: (id)annotation {
     
     // will be overrided in Main file.
     return false;
-}
+}*/
 
 @end

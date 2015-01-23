@@ -16,6 +16,8 @@
 		</exec>
 
 		<copy file="../temp/ios/build/Release-iphoneos/lib${name}IosExtension.a" todir="../temp/ios" overwrite="true" />
+		
+		<copydir src="../ios/GooglePlusIosExtension/include-dyn" dest="../temp/ios" />
 
 		<delete dir="../temp/ios/build/" />
 	</target>

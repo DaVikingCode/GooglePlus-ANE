@@ -10,8 +10,12 @@
 
 @class GTMOAuth2Authentication;
 
-@interface GooglePlusHelpers : NSObject <UIApplicationDelegate, GPPSignInDelegate>
+@interface GooglePlusHelpers : NSObject <GPPSignInDelegate>
 
 - (void) login;
+
+- (void) signOut;
+
+- (void) disconnect;
 
 @end
