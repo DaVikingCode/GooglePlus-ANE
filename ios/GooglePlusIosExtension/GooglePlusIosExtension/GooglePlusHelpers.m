@@ -42,35 +42,37 @@
 
 - (void)finishedWithAuth:(GTMOAuth2Authentication *)auth error:(NSError *)error {
     
-    if (error) {
-        
+    if (error)
         [self dispatchEvent:@"LOGIN_FAILED" withParams:@""];
-        //NSLog(@"login failed");
         
-    } else if ([[GPPSignIn sharedInstance] authentication]) {
-        
+    else if ([[GPPSignIn sharedInstance] authentication])
         [self dispatchEvent:@"LOGIN_SUCCESSED" withParams:@""];
-        //NSLog(@"login success");
-        
-        id<GPPShareBuilder> shareBuilder = [[GPPShare sharedInstance] nativeShareDialog];//[[GPPShare sharedInstance] shareDialog];
-        
-        [shareBuilder setURLToShare:[NSURL URLWithString:@"https://www.example.com/restaurant/sf/1234567/"]];
-        [shareBuilder open];
-    }
+}
+
+- (void) shareURL:(NSString *) url andPrefillText:(NSString *) prefillText withNativeShareDialog:(BOOL) useNativeShareDialog {
+    
+    id<GPPShareBuilder> shareBuilder = useNativeShareDialog ? [[GPPShare sharedInstance] nativeShareDialog] : [[GPPShare sharedInstance] shareDialog];
+    
+    [shareBuilder setURLToShare:[NSURL URLWithString:url]];
+    [shareBuilder setPrefillText:prefillText];
+    [shareBuilder open];
+}
+
+- (void) sharePostWithTitle:(NSString *) title andDescription:(NSString *) description andThumbnailURL:(NSString *) thumbnailURL withNativeShareDialog:(BOOL) useNativeShareDialog {
+    
+    id<GPPShareBuilder> shareBuilder = useNativeShareDialog ? [[GPPShare sharedInstance] nativeShareDialog] : [[GPPShare sharedInstance] shareDialog];
+    
+    [shareBuilder setTitle:title description:description thumbnailURL:[NSURL URLWithString:thumbnailURL]];
+    [shareBuilder open];
 }
 
 - (void)finishedSharing:(BOOL)shared {
     
-    if (shared) {
-        
+    if (shared)
         [self dispatchEvent:@"POST_SHARED" withParams:@""];
-        //NSLog(@"User successfully shared!");
-        
-    } else {
-        
+    
+    else
         [self dispatchEvent:@"POST_NOT_SHARED" withParams:@""];
-        //NSLog(@"User didn't share.");
-    }
 }
 
 - (void) signOut {
@@ -85,14 +87,11 @@
 
 - (void)didDisconnectWithError:(NSError *)error {
     
-    if (error) {
+    if (error)
         NSLog(@"Received error %@", error);
         
-    } else {
-        
+    else
         [self dispatchEvent:@"DISCONNECTED" withParams:@""];
-        //NSLog(@"User is disconnected and the application isn't linked anymore to Google+");
-    }
 }
 
 - (void) dispatchEvent:(NSString *) event withParams:(NSString * ) params {

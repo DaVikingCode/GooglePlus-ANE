@@ -30,6 +30,65 @@ DEFINE_ANE_FUNCTION(login) {
     return NULL;
 }
 
+DEFINE_ANE_FUNCTION(signOut) {
+    
+    [googlePlusHelpers signOut];
+    
+    return NULL;
+}
+
+DEFINE_ANE_FUNCTION(disconnect) {
+    
+    [googlePlusHelpers disconnect];
+    
+    return NULL;
+}
+
+DEFINE_ANE_FUNCTION(shareURL) {
+    
+    uint32_t string1Length;
+    const uint8_t *url;
+    
+    FREGetObjectAsUTF8(argv[0], &string1Length, &url);
+    
+    uint32_t string2Length;
+    const uint8_t *text;
+    
+    FREGetObjectAsUTF8(argv[1], &string2Length, &text);
+    
+    uint32_t nativeShareDialog;
+    FREGetObjectAsBool(argv[2], &nativeShareDialog);
+    
+    [googlePlusHelpers shareURL:[NSString stringWithUTF8String:(char*) url] andPrefillText:[NSString stringWithUTF8String:(char*) text] withNativeShareDialog:nativeShareDialog];
+    
+    return NULL;
+}
+
+DEFINE_ANE_FUNCTION(sharePost) {
+    
+    uint32_t string1Length;
+    const uint8_t *title;
+    
+    FREGetObjectAsUTF8(argv[0], &string1Length, &title);
+    
+    uint32_t string2Length;
+    const uint8_t *desc;
+    
+    FREGetObjectAsUTF8(argv[1], &string2Length, &desc);
+    
+    uint32_t string3Length;
+    const uint8_t *url;
+    
+    FREGetObjectAsUTF8(argv[2], &string3Length, &url);
+    
+    uint32_t nativeShareDialog;
+    FREGetObjectAsBool(argv[3], &nativeShareDialog);
+    
+    [googlePlusHelpers sharePostWithTitle:[NSString stringWithUTF8String:(char*) title] andDescription:[NSString stringWithUTF8String:(char*) desc] andThumbnailURL:[NSString stringWithUTF8String:(char*) url] withNativeShareDialog:nativeShareDialog];
+    
+    return NULL;
+}
+
 bool applicationOpenURLSourceApplication(id self, SEL _cmd, UIApplication* application, NSURL* url, NSString* sourceApplication, id annotation) {
     
     return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
@@ -60,7 +119,11 @@ void GooglePlusContextInitializer(void* extData, const uint8_t* ctxType, FRECont
     object_setClass(delegate, modDelegate);
     
     static FRENamedFunction functionMap[] = {
-        MAP_FUNCTION(login, NULL )
+        MAP_FUNCTION(login, NULL),
+        MAP_FUNCTION(signOut, NULL),
+        MAP_FUNCTION(disconnect, NULL),
+        MAP_FUNCTION(shareURL, NULL),
+        MAP_FUNCTION(sharePost, NULL)
     };
     
     *numFunctionsToSet = sizeof( functionMap ) / sizeof( FRENamedFunction );

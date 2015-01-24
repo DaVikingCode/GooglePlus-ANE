@@ -19,10 +19,11 @@
 - (id) initWithContext:(FREContext) context;
 
 - (void) loginWithKey:(NSString *) key;
-
 - (void) signOut;
-
 - (void) disconnect;
+
+- (void) shareURL:(NSString *) url andPrefillText:(NSString *) prefillText withNativeShareDialog:(BOOL) useNativeShareDialog;
+- (void) sharePostWithTitle:(NSString *) title andDescription:(NSString *) description andThumbnailURL:(NSString *) thumbnailURL withNativeShareDialog:(BOOL) useNativeShareDialog;
 
 - (void) dispatchEvent:(NSString *) event withParams:(NSString * ) params;
 
