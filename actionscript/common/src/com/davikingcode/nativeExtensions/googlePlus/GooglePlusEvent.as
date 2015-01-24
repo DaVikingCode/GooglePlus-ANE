@@ -13,7 +13,7 @@ package com.davikingcode.nativeExtensions.googlePlus {
 		static public const DISCONNECTED:String = "DISCONNECTED";
 
 		public function GooglePlusEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false) {
-			super( type, bubbles, cancelable );
+			super(type, bubbles, cancelable);
 		}
 	}
 }

@@ -11,6 +11,10 @@ package com.davikingcode.nativeExtensions.googlePlus {
 		public var extensionContext:ExtensionContext;
 
 		public static function getInstance():GooglePlus {
+
+			if (!_instance)
+				_instance = new GooglePlus();
+
 			return _instance;
 		}
 
@@ -55,6 +59,26 @@ package com.davikingcode.nativeExtensions.googlePlus {
 		public function login(key:String):void {
 
 			extensionContext.call("login", key);
+		}
+
+		public function signOut():void {
+
+			extensionContext.call("signOut");
+		}
+
+		public function disconnect():void {
+
+			extensionContext.call("disconnect");
+		}
+
+		public function shareURL(url:String, text:String = "", useNativeShareDialog:Boolean = true):void {
+
+			extensionContext.call("shareURL", url, text, useNativeShareDialog);
+		}
+
+		public function sharePost(title:String, description:String = "", thumbnailURL:String = "", useNativeShareDialog:Boolean = true):void {
+
+			extensionContext.call("sharePost", title, description, thumbnailURL, useNativeShareDialog);
 		}
 
 	}

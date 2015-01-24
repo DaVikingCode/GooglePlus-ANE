@@ -8,6 +8,10 @@ package com.davikingcode.nativeExtensions.googlePlus {
 		private static var _instance:GooglePlus;
 
 		public static function getInstance():GooglePlus {
+
+			if (!_instance)
+				_instance = new GooglePlus();
+
 			return _instance;
 		}
 
@@ -17,6 +21,18 @@ package com.davikingcode.nativeExtensions.googlePlus {
 		}
 
 		public function login(key:String):void {
+		}
+
+		public function signOut():void {
+		}
+
+		public function disconnect():void {
+		}
+
+		public function shareURL(url:String, text:String = "", useNativeShareDialog:Boolean = true):void {
+		}
+
+		public function sharePost(title:String, description:String = "", thumbnailURL:String = "", useNativeShareDialog:Boolean = true):void {
 		}
 
 	}
