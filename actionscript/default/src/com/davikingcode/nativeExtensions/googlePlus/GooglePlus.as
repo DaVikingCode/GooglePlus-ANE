@@ -19,7 +19,7 @@ package com.davikingcode.nativeExtensions.googlePlus {
 
 			_instance = this;
 		}
-
+		
 		public function login(key:String):void {
 		}
 
@@ -29,11 +29,15 @@ package com.davikingcode.nativeExtensions.googlePlus {
 		public function disconnect():void {
 		}
 
+		public function isAuthenticated():Boolean {
+			return false;
+		}
+
 		public function shareURL(url:String, text:String = "", useNativeShareDialog:Boolean = true):void {
 		}
 
-		public function sharePost(title:String, description:String = "", thumbnailURL:String = "", useNativeShareDialog:Boolean = true):void {
-		}
+		/*public function sharePost(title:String, description:String = "", thumbnailURL:String = "", useNativeShareDialog:Boolean = true):void {
+		}*/
 
 	}
 }

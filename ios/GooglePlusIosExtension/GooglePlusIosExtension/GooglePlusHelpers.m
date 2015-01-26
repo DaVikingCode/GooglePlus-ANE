@@ -63,6 +63,10 @@
     id<GPPShareBuilder> shareBuilder = useNativeShareDialog ? [[GPPShare sharedInstance] nativeShareDialog] : [[GPPShare sharedInstance] shareDialog];
     
     [shareBuilder setTitle:title description:description thumbnailURL:[NSURL URLWithString:thumbnailURL]];
+    
+    //need to set a deep linkage...
+    //[shareBuilder setContentDeepLinkID:@"rest=1234567"];
+    
     [shareBuilder open];
 }
 
@@ -83,6 +87,11 @@
 - (void) disconnect {
     
     [[GPPSignIn sharedInstance] disconnect];
+}
+
+- (BOOL) isAuthenticated {
+    
+    return [[GPPSignIn sharedInstance] authentication] ? TRUE : FALSE;
 }
 
 - (void)didDisconnectWithError:(NSError *)error {

@@ -23,8 +23,6 @@ DEFINE_ANE_FUNCTION(login) {
     
     FREGetObjectAsUTF8(argv[0], &stringLength, &key);
     
-    googlePlusHelpers = [[GooglePlusHelpers alloc] initWithContext:context];
-    
     [googlePlusHelpers loginWithKey:[NSString stringWithUTF8String:(char*) key]];
     
     return NULL;
@@ -42,6 +40,14 @@ DEFINE_ANE_FUNCTION(disconnect) {
     [googlePlusHelpers disconnect];
     
     return NULL;
+}
+
+DEFINE_ANE_FUNCTION(isAuthenticated) {
+    
+    FREObject retBool = nil;
+    FRENewObjectFromBool([googlePlusHelpers isAuthenticated], &retBool);
+    
+    return retBool;
 }
 
 DEFINE_ANE_FUNCTION(shareURL) {
@@ -122,6 +128,7 @@ void GooglePlusContextInitializer(void* extData, const uint8_t* ctxType, FRECont
         MAP_FUNCTION(login, NULL),
         MAP_FUNCTION(signOut, NULL),
         MAP_FUNCTION(disconnect, NULL),
+        MAP_FUNCTION(isAuthenticated, NULL),
         MAP_FUNCTION(shareURL, NULL),
         MAP_FUNCTION(sharePost, NULL)
     };
@@ -129,6 +136,7 @@ void GooglePlusContextInitializer(void* extData, const uint8_t* ctxType, FRECont
     *numFunctionsToSet = sizeof( functionMap ) / sizeof( FRENamedFunction );
     *functionsToSet = functionMap;
     
+    googlePlusHelpers = [[GooglePlusHelpers alloc] initWithContext:ctx];
 }
 
 void GooglePlusContextFinalizer(FREContext ctx) {
@@ -137,7 +145,7 @@ void GooglePlusContextFinalizer(FREContext ctx) {
 
 void GooglePlusExtensionInitializer( void** extDataToSet, FREContextInitializer* ctxInitializerToSet, FREContextFinalizer* ctxFinalizerToSet ) {
     
-    extDataToSet = NULL; // This example does not use any extension data.
+    extDataToSet = NULL;
     *ctxInitializerToSet = &GooglePlusContextInitializer;
     *ctxFinalizerToSet = &GooglePlusContextFinalizer;
 }

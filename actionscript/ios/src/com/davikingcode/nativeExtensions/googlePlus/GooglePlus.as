@@ -56,30 +56,54 @@ package com.davikingcode.nativeExtensions.googlePlus {
 			}
 		}
 
+		/**
+		* Login to the Google+ account via its app. If the user doesn't have the Google+ app, the login is done via the Google+ website.
+		* The user is redirected to its app if the login process is cancelled or completed.
+		* @param key The client ID of the app from the Google APIs console.
+		*/
 		public function login(key:String):void {
 
 			extensionContext.call("login", key);
 		}
 
+		/**
+		* Removes the OAuth 2.0 token from the keychain, it doesn't dispatch a <code>GooglePlusEvent.DISCONNECTED</code>.
+		*/
 		public function signOut():void {
 
 			extensionContext.call("signOut");
 		}
 
+		/**
+		* Disconnects the user from the app and revokes previous authentication. If the operation succeeds, the OAuth 2.0 token is also removed from keychain.
+		* The token is needed to disconnect so do not call signOut if disconnect is to be called.
+		* Dispatch <code>GooglePlusEvent.DISCONNECTED</code> on success.
+		*/
 		public function disconnect():void {
 
 			extensionContext.call("disconnect");
 		}
 
+		public function isAuthenticated():Boolean {
+
+			return extensionContext.call("isAuthenticated");
+		}
+
+		/**
+		* Share an URL. Will dispatch a GooglePlusEvent.POST_SHARED on success or GooglePlusEvent.POST_NOT_SHARED if user canceled.
+		* @param url The URL to share.
+		* @param text Sets the text to prefill user's comment in the share dialog.
+		* @param useNativeShareDialog Use the iOS native share dialog without leaving the app, set it to false to share via the browser.
+		*/
 		public function shareURL(url:String, text:String = "", useNativeShareDialog:Boolean = true):void {
 
 			extensionContext.call("shareURL", url, text, useNativeShareDialog);
 		}
 
-		public function sharePost(title:String, description:String = "", thumbnailURL:String = "", useNativeShareDialog:Boolean = true):void {
+		/*public function sharePost(title:String, description:String = "", thumbnailURL:String = "", useNativeShareDialog:Boolean = true):void {
 
 			extensionContext.call("sharePost", title, description, thumbnailURL, useNativeShareDialog);
-		}
+		}*/
 
 	}
 }

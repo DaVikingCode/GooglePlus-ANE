@@ -4,6 +4,7 @@ package {
 	import com.davikingcode.nativeExtensions.googlePlus.GooglePlusEvent;
 
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 
@@ -18,6 +19,7 @@ package {
 		private var _txtGoogleLogin:TextField;
 		private var _btnGoogleLogin:Sprite;
 		private var _txtPostShared:TextField;
+		private var _btnPostShared:Sprite;
 
 		public function GooglePlusTest() {
 			
@@ -36,20 +38,54 @@ package {
 			_txtGoogleLogin.mouseEnabled = false;
 			addChild(_txtGoogleLogin);
 			
+			_btnGoogleLogin = new Sprite();
+			_btnGoogleLogin.graphics.beginFill(0xcccccc);
+			_btnGoogleLogin.graphics.drawRect(0, 0, 350, 200);
+			_btnGoogleLogin.graphics.endFill();
+			_btnGoogleLogin.x = stage.stageWidth / 2;
+			addChild(_btnGoogleLogin);
+			
 			_txtPostShared = new TextField();
 			_txtPostShared.defaultTextFormat = new TextFormat("Arial", 20);
 			_txtPostShared.width = stage.stageWidth;
-			_txtPostShared.text = "";
-			_txtPostShared.y = 100;
+			_txtPostShared.text = "Share post ?";
+			_txtPostShared.y = 250;
 			_txtPostShared.mouseEnabled = false;
 			addChild(_txtPostShared);
+			
+			_btnPostShared = new Sprite();
+			_btnPostShared.graphics.beginFill(0xcccccc);
+			_btnPostShared.graphics.drawRect(0, 0, 350, 200);
+			_btnPostShared.graphics.endFill();
+			_btnPostShared.x = stage.stageWidth / 2;
+			_btnPostShared.y = 250
+			addChild(_btnPostShared);
 
-			_googlePlus.login(_KEY);
+			_btnGoogleLogin.addEventListener(MouseEvent.CLICK, _login);
+			_btnPostShared.addEventListener(MouseEvent.CLICK, _shareRandomPost);
+		}
+
+		private function _login(mEvt:MouseEvent):void {
+			
+			if (!_googlePlus.isAuthenticated())
+				_googlePlus.login(_KEY);
+			else
+				_googlePlus.disconnect();
+		}
+		
+		private function _shareRandomPost(mEvt:MouseEvent):void {
+			
+			if (_googlePlus.isAuthenticated())
+				_googlePlus.shareURL("https://github.com/DaVikingCode/Instagram-ANE", "An awesome free ANE");
 		}
 
 		private function _loginSuccessed(gpEvt:GooglePlusEvent):void {
 			
 			trace("login successed");
+			
+			_btnGoogleLogin.graphics.beginFill(0x00FF00);
+			_btnGoogleLogin.graphics.drawRect(0, 0, 350, 200);
+			_btnGoogleLogin.graphics.endFill();
 			
 			_txtGoogleLogin.text = "Logged in Google+ ? True.";
 		}
@@ -78,6 +114,10 @@ package {
 		private function _disconnected(gpEvt:GooglePlusEvent):void {
 			
 			trace("disconnected");
+			
+			_btnGoogleLogin.graphics.beginFill(0xFF0000);
+			_btnGoogleLogin.graphics.drawRect(0, 0, 350, 200);
+			_btnGoogleLogin.graphics.endFill();
 			
 			_txtGoogleLogin.text = "Logged in Google+ ? False.";
 		}
