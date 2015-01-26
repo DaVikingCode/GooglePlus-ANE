@@ -18,13 +18,16 @@
 
 - (id) initWithContext:(FREContext) context;
 
-- (void) loginWithKey:(NSString *) key;
+- (void) loginWithKey:(NSString *) key andShouldFetchGoogleUserEmail:(BOOL) fetchGoogleUserEmail andShouldFetchGooglePlusUser:(BOOL) fetchGooglePlusUser andShouldFetchGoogleUserID:(BOOL) fetchGoogleUserID;
 - (void) signOut;
 - (void) disconnect;
 - (BOOL) isAuthenticated;
 
 - (void) shareURL:(NSString *) url andPrefillText:(NSString *) prefillText withNativeShareDialog:(BOOL) useNativeShareDialog;
 - (void) sharePostWithTitle:(NSString *) title andDescription:(NSString *) description andThumbnailURL:(NSString *) thumbnailURL withNativeShareDialog:(BOOL) useNativeShareDialog;
+
+- (NSString *) getUserMail;
+- (NSString *) getUserID;
 
 - (void) dispatchEvent:(NSString *) event withParams:(NSString * ) params;
 

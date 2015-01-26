@@ -60,10 +60,13 @@ package com.davikingcode.nativeExtensions.googlePlus {
 		* Login to the Google+ account via its app. If the user doesn't have the Google+ app, the login is done via the Google+ website.
 		* The user is redirected to its app if the login process is cancelled or completed.
 		* @param key The client ID of the app from the Google APIs console.
+		* @param fetchGoogleUserEmail If true we can read user's mail.
+		* @param fetchGoogleUserEmail If true know who you are on Google.
+		* @param fetchGoogleUserID If true we can read user's ID.
 		*/
-		public function login(key:String):void {
+		public function login(key:String, fetchGoogleUserEmail:Boolean = false, fetchGooglePlusUser:Boolean = false, fetchGoogleUserID:Boolean = false):void {
 
-			extensionContext.call("login", key);
+			extensionContext.call("login", key, fetchGoogleUserEmail, fetchGooglePlusUser, fetchGoogleUserID);
 		}
 
 		/**
@@ -86,7 +89,7 @@ package com.davikingcode.nativeExtensions.googlePlus {
 
 		public function isAuthenticated():Boolean {
 
-			return extensionContext.call("isAuthenticated");
+			return extensionContext.call("isAuthenticated") as Boolean;
 		}
 
 		/**
@@ -104,6 +107,19 @@ package com.davikingcode.nativeExtensions.googlePlus {
 
 			extensionContext.call("sharePost", title, description, thumbnailURL, useNativeShareDialog);
 		}*/
+
+		/**
+		* Grab the user mail, only works if you set <i>shouldFetchGoogleUserEmail</i> to true when calling <code>login</code> method.
+		*/
+		public function getUserMail():String {
+
+			return extensionContext.call("getUserMail") as String;
+		}
+
+		public function getUserID():String {
+			
+			return extensionContext.call("getUserID") as String;
+		}
 
 	}
 }

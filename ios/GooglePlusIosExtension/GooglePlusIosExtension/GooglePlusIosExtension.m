@@ -23,7 +23,16 @@ DEFINE_ANE_FUNCTION(login) {
     
     FREGetObjectAsUTF8(argv[0], &stringLength, &key);
     
-    [googlePlusHelpers loginWithKey:[NSString stringWithUTF8String:(char*) key]];
+    uint32_t fetchGoogleUserEmail;
+    FREGetObjectAsBool(argv[1], &fetchGoogleUserEmail);
+    
+    uint32_t fetchGooglePlusUser;
+    FREGetObjectAsBool(argv[2], &fetchGooglePlusUser);
+    
+    uint32_t fetchGoogleUserID;
+    FREGetObjectAsBool(argv[3], &fetchGoogleUserID);
+    
+    [googlePlusHelpers loginWithKey:[NSString stringWithUTF8String:(char*) key] andShouldFetchGoogleUserEmail:fetchGoogleUserEmail andShouldFetchGooglePlusUser:fetchGooglePlusUser andShouldFetchGoogleUserID:fetchGoogleUserID];
     
     return NULL;
 }
@@ -95,6 +104,26 @@ DEFINE_ANE_FUNCTION(sharePost) {
     return NULL;
 }
 
+DEFINE_ANE_FUNCTION(getUserMail) {
+    
+    const char *str = [[googlePlusHelpers getUserMail] UTF8String];
+    
+    FREObject retStr;
+    FRENewObjectFromUTF8(strlen(str)+1, (const uint8_t*)str, &retStr);
+    
+    return retStr;
+}
+
+DEFINE_ANE_FUNCTION(getUserID) {
+    
+    const char *str = [[googlePlusHelpers getUserID] UTF8String];
+    
+    FREObject retStr;
+    FRENewObjectFromUTF8(strlen(str)+1, (const uint8_t*)str, &retStr);
+    
+    return retStr;
+}
+
 bool applicationOpenURLSourceApplication(id self, SEL _cmd, UIApplication* application, NSURL* url, NSString* sourceApplication, id annotation) {
     
     return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
@@ -130,7 +159,9 @@ void GooglePlusContextInitializer(void* extData, const uint8_t* ctxType, FRECont
         MAP_FUNCTION(disconnect, NULL),
         MAP_FUNCTION(isAuthenticated, NULL),
         MAP_FUNCTION(shareURL, NULL),
-        MAP_FUNCTION(sharePost, NULL)
+        MAP_FUNCTION(sharePost, NULL),
+        MAP_FUNCTION(getUserMail, NULL),
+        MAP_FUNCTION(getUserID, NULL)
     };
     
     *numFunctionsToSet = sizeof( functionMap ) / sizeof( FRENamedFunction );

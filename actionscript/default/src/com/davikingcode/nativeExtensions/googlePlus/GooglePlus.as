@@ -19,8 +19,8 @@ package com.davikingcode.nativeExtensions.googlePlus {
 
 			_instance = this;
 		}
-		
-		public function login(key:String):void {
+
+		public function login(key:String, fetchGoogleUserEmail:Boolean = false, fetchGooglePlusUser:Boolean = false, fetchGoogleUserID:Boolean = false):void {
 		}
 
 		public function signOut():void {
@@ -39,5 +39,12 @@ package com.davikingcode.nativeExtensions.googlePlus {
 		/*public function sharePost(title:String, description:String = "", thumbnailURL:String = "", useNativeShareDialog:Boolean = true):void {
 		}*/
 
+		public function getUserMail():String {
+			return "";
+		}
+
+		public function getUserID():String {
+			return "";
+		}
 	}
 }

@@ -58,7 +58,7 @@ package {
 			_btnPostShared.graphics.drawRect(0, 0, 350, 200);
 			_btnPostShared.graphics.endFill();
 			_btnPostShared.x = stage.stageWidth / 2;
-			_btnPostShared.y = 250
+			_btnPostShared.y = 250;
 			addChild(_btnPostShared);
 
 			_btnGoogleLogin.addEventListener(MouseEvent.CLICK, _login);
@@ -82,7 +82,7 @@ package {
 		private function _loginSuccessed(gpEvt:GooglePlusEvent):void {
 			
 			trace("login successed");
-			
+			trace(_googlePlus.getUserID());
 			_btnGoogleLogin.graphics.beginFill(0x00FF00);
 			_btnGoogleLogin.graphics.drawRect(0, 0, 350, 200);
 			_btnGoogleLogin.graphics.endFill();

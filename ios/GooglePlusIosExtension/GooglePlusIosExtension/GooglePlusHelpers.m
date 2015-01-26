@@ -25,13 +25,17 @@
     return self;
 }
 
-- (void) loginWithKey:(NSString *) key {
+- (void) loginWithKey:(NSString *) key andShouldFetchGoogleUserEmail:(BOOL) fetchGoogleUserEmail andShouldFetchGooglePlusUser:(BOOL) fetchGooglePlusUser andShouldFetchGoogleUserID:(BOOL) fetchGoogleUserID {
     
     GPPSignIn *signIn = [GPPSignIn sharedInstance];
     
     signIn.clientID = key;
     
-    signIn.scopes = [NSArray arrayWithObjects:kGTLAuthScopePlusLogin, nil];
+    signIn.scopes = [[NSArray alloc] initWithObjects:kGTLAuthScopePlusLogin, nil];
+    
+    signIn.shouldFetchGoogleUserEmail = fetchGoogleUserEmail;
+    signIn.shouldFetchGooglePlusUser = fetchGooglePlusUser;
+    signIn.shouldFetchGoogleUserID = fetchGoogleUserID;
     
     [signIn setDelegate:self];
     [[GPPShare sharedInstance] setDelegate:self];
@@ -101,6 +105,16 @@
         
     else
         [self dispatchEvent:@"DISCONNECTED" withParams:@""];
+}
+
+- (NSString *) getUserMail {
+    
+    return [GPPSignIn sharedInstance].userEmail;
+}
+
+- (NSString *) getUserID {
+    
+    return  [GPPSignIn sharedInstance].userID;
 }
 
 - (void) dispatchEvent:(NSString *) event withParams:(NSString * ) params {
