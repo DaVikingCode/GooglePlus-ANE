@@ -8,6 +8,9 @@
 
 #import "GooglePlusHelpers.h"
 #import "GoogleOpenSource/GTLPlusConstants.h"
+#import "GoogleOpenSource/GTLQueryPlus.h"
+#import "GoogleOpenSource/GTLPlusPerson.h"
+#import "GoogleOpenSource/GTLServicePlus.h"
 
 @interface GooglePlusHelpers ()
 
@@ -115,6 +118,23 @@
 - (NSString *) getUserID {
     
     return  [GPPSignIn sharedInstance].userID;
+}
+
+- (void) getUserInfo {
+    
+    GTLQueryPlus* query = [GTLQueryPlus queryForPeopleGetWithUserId:@"me"];
+    
+    [[[GPPSignIn sharedInstance] plusService] executeQuery:query completionHandler:^(GTLServiceTicket *ticket,
+                                                                                     GTLPlusPerson *person,
+                                                                                     NSError *error) {
+        
+        if (error) {
+            
+        } else {
+            
+            NSLog(@"%@", person.displayName);
+        }
+    }];
 }
 
 - (void) dispatchEvent:(NSString *) event withParams:(NSString * ) params {

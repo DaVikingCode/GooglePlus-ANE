@@ -29,6 +29,8 @@
 - (NSString *) getUserMail;
 - (NSString *) getUserID;
 
+- (void) getUserInfo;
+
 - (void) dispatchEvent:(NSString *) event withParams:(NSString * ) params;
 
 @end

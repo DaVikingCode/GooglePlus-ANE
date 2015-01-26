@@ -8,20 +8,20 @@
 
 #import "FlashRuntimeExtensions.h"
 #import "GooglePlusHelpers.h"
+#import "TypeConversion.h"
 
 #import <objc/runtime.h>
 
 #define DEFINE_ANE_FUNCTION(fn) FREObject (fn)(FREContext context, void* functionData, uint32_t argc, FREObject argv[])
 #define MAP_FUNCTION(fn, data) { (const uint8_t*)(#fn), (data), &(fn) }
 
-GooglePlusHelpers *googlePlusHelpers;
+GooglePlusHelpers* googlePlusHelpers;
+TypeConversion* typeConverter;
 
 DEFINE_ANE_FUNCTION(login) {
     
-    uint32_t stringLength;
-    const uint8_t *key;
-    
-    FREGetObjectAsUTF8(argv[0], &stringLength, &key);
+    NSString* key;
+    [typeConverter FREGetObject:argv[0] asString:&key];
     
     uint32_t fetchGoogleUserEmail;
     FREGetObjectAsBool(argv[1], &fetchGoogleUserEmail);
@@ -32,7 +32,7 @@ DEFINE_ANE_FUNCTION(login) {
     uint32_t fetchGoogleUserID;
     FREGetObjectAsBool(argv[3], &fetchGoogleUserID);
     
-    [googlePlusHelpers loginWithKey:[NSString stringWithUTF8String:(char*) key] andShouldFetchGoogleUserEmail:fetchGoogleUserEmail andShouldFetchGooglePlusUser:fetchGooglePlusUser andShouldFetchGoogleUserID:fetchGoogleUserID];
+    [googlePlusHelpers loginWithKey:key andShouldFetchGoogleUserEmail:fetchGoogleUserEmail andShouldFetchGooglePlusUser:fetchGooglePlusUser andShouldFetchGoogleUserID:fetchGoogleUserID];
     
     return NULL;
 }
@@ -61,67 +61,58 @@ DEFINE_ANE_FUNCTION(isAuthenticated) {
 
 DEFINE_ANE_FUNCTION(shareURL) {
     
-    uint32_t string1Length;
-    const uint8_t *url;
+    NSString* url;
+    [typeConverter FREGetObject:argv[0] asString:&url];
     
-    FREGetObjectAsUTF8(argv[0], &string1Length, &url);
     
-    uint32_t string2Length;
-    const uint8_t *text;
-    
-    FREGetObjectAsUTF8(argv[1], &string2Length, &text);
+    NSString* text;
+    [typeConverter FREGetObject:argv[1] asString:&text];
     
     uint32_t nativeShareDialog;
     FREGetObjectAsBool(argv[2], &nativeShareDialog);
     
-    [googlePlusHelpers shareURL:[NSString stringWithUTF8String:(char*) url] andPrefillText:[NSString stringWithUTF8String:(char*) text] withNativeShareDialog:nativeShareDialog];
+    [googlePlusHelpers shareURL:url andPrefillText:text withNativeShareDialog:nativeShareDialog];
     
     return NULL;
 }
 
 DEFINE_ANE_FUNCTION(sharePost) {
     
-    uint32_t string1Length;
-    const uint8_t *title;
+    NSString* title;
+    [typeConverter FREGetObject:argv[0] asString:&title];
     
-    FREGetObjectAsUTF8(argv[0], &string1Length, &title);
+    NSString* desc;
+    [typeConverter FREGetObject:argv[1] asString:&desc];
     
-    uint32_t string2Length;
-    const uint8_t *desc;
-    
-    FREGetObjectAsUTF8(argv[1], &string2Length, &desc);
-    
-    uint32_t string3Length;
-    const uint8_t *url;
-    
-    FREGetObjectAsUTF8(argv[2], &string3Length, &url);
+    NSString* url;
+    [typeConverter FREGetObject:argv[2] asString:&url];
     
     uint32_t nativeShareDialog;
     FREGetObjectAsBool(argv[3], &nativeShareDialog);
     
-    [googlePlusHelpers sharePostWithTitle:[NSString stringWithUTF8String:(char*) title] andDescription:[NSString stringWithUTF8String:(char*) desc] andThumbnailURL:[NSString stringWithUTF8String:(char*) url] withNativeShareDialog:nativeShareDialog];
+    [googlePlusHelpers sharePostWithTitle:title andDescription:desc andThumbnailURL:url withNativeShareDialog:nativeShareDialog];
     
     return NULL;
 }
 
 DEFINE_ANE_FUNCTION(getUserMail) {
     
-    const char *str = [[googlePlusHelpers getUserMail] UTF8String];
+    FREObject result;
     
-    FREObject retStr;
-    FRENewObjectFromUTF8(strlen(str)+1, (const uint8_t*)str, &retStr);
+    if ([typeConverter FREGetString:[googlePlusHelpers getUserMail] asObject:&result] == FRE_OK)
+        return result;
     
-    return retStr;
+    return NULL;
 }
 
 DEFINE_ANE_FUNCTION(getUserID) {
     
-    const char *str = [[googlePlusHelpers getUserID] UTF8String];
+    FREObject result;
     
-    FREObject retStr;
-    FRENewObjectFromUTF8(strlen(str)+1, (const uint8_t*)str, &retStr);
+    if ([typeConverter FREGetString:[googlePlusHelpers getUserID] asObject:&result] == FRE_OK)
+        return result;
     
-    return retStr;
+    return NULL;
 }
 
 bool applicationOpenURLSourceApplication(id self, SEL _cmd, UIApplication* application, NSURL* url, NSString* sourceApplication, id annotation) {
@@ -168,6 +159,7 @@ void GooglePlusContextInitializer(void* extData, const uint8_t* ctxType, FRECont
     *functionsToSet = functionMap;
     
     googlePlusHelpers = [[GooglePlusHelpers alloc] initWithContext:ctx];
+    typeConverter = [[TypeConversion alloc] init];
 }
 
 void GooglePlusContextFinalizer(FREContext ctx) {

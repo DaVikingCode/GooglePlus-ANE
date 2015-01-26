@@ -82,7 +82,7 @@ package {
 		private function _loginSuccessed(gpEvt:GooglePlusEvent):void {
 			
 			trace("login successed");
-			trace(_googlePlus.getUserID());
+			
 			_btnGoogleLogin.graphics.beginFill(0x00FF00);
 			_btnGoogleLogin.graphics.drawRect(0, 0, 350, 200);
 			_btnGoogleLogin.graphics.endFill();
