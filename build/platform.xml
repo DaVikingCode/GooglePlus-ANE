@@ -2,16 +2,17 @@
 <platform xmlns="http://ns.adobe.com/air/extension/3.5">
 
 	<linkerOptions>
-
 		<option>-ios_version_min 6.0</option>
-		<option>-framework GooglePlus</option>
-		<option>-framework GoogleOpenSource</option>
 		<option>-framework MediaPlayer</option>
 		<option>-framework CoreText</option>
-		<option>-framework CoreMotion</option>
+		<option>-weak_framework CoreMotion</option>
 		<option>-framework AssetsLibrary</option>
 		<option>-framework AddressBook</option>
-		
 	</linkerOptions>
+	
+	 <packagedDependencies>
+		<packagedDependency>GooglePlus.framework</packagedDependency>
+		<packagedDependency>GoogleOpenSource.framework</packagedDependency>
+	 </packagedDependencies>
 
 </platform>
