@@ -9,6 +9,20 @@
 				<finalizer>GooglePlusExtensionFinalizer</finalizer>
 			</applicationDeployment>
 		</platform>
+		<platform name="Android-ARM">
+			<applicationDeployment>
+				<nativeLibrary>GooglePlusAndroidExtension.jar</nativeLibrary>
+				<initializer>com.davikingcode.nativeExtensions.googlePlus.GooglePlusExtension</initializer>
+				<finalizer>com.davikingcode.nativeExtensions.googlePlus.GooglePlusExtension</finalizer>
+			</applicationDeployment>
+		</platform>
+		<platform name="Android-x86">
+			<applicationDeployment>
+				<nativeLibrary>GooglePlusAndroidExtension.jar</nativeLibrary>
+				<initializer>com.davikingcode.nativeExtensions.googlePlus.GooglePlusExtension</initializer>
+				<finalizer>com.davikingcode.nativeExtensions.googlePlus.GooglePlusExtension</finalizer>
+			</applicationDeployment>
+		</platform>
 		<platform name="default">
 			<applicationDeployment/>
 		</platform>
