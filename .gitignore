@@ -5,3 +5,5 @@
 *.swf
 *.tmp
 bin/GooglePlusANE.app.dSYM/Contents/Info.plist
+GooglePlus.ane
+GooglePlus.swc
