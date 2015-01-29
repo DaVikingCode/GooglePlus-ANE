@@ -250,6 +250,20 @@
   <android>
     <manifestAdditions><![CDATA[<manifest>
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-configuration android:reqFiveWayNav="true"/>
+    <supports-screens android:normalScreens="true"/>
+    <uses-feature android:required="true" android:name="android.hardware.touchscreen.multitouch"/>
+    <application android:enabled="true">
+    	<activity android:excludeFromRecents="false">
+    		<intent-filter>
+    			<action android:name="android.intent.action.MAIN"/>
+    			<category android:name="android.intent.category.LAUNCHER"/>
+    		</intent-filter>
+    	</activity>
+    	<activity android:name="com.davikingcode.nativeExtensions.googlePlus.LoginActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"></activity>
+    </application>
   </manifest>]]></manifestAdditions>
   </android>
 </application>

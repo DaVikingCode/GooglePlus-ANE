@@ -52,6 +52,9 @@
 
 		<mkdir dir="../temp/android/" />
 		<jar basedir="../android/temp/classes" destfile="../temp/android/${name}AndroidExtension.jar" />
+		<copy todir="../temp/android/res/">
+			<fileset dir="../android/app/res" />
+		</copy>
 		<delete dir="../android/temp" />
 	</target>
 

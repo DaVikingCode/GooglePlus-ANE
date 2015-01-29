@@ -7,14 +7,18 @@ import java.lang.Override;
 
 public class GooglePlusExtension implements FREExtension {
 
+    static public GooglePlusExtensionContext context;
+
     @Override
     public FREContext createContext(String label) {
 
-        return new GooglePlusExtensionContext();
+        return context = new GooglePlusExtensionContext();
     }
 
     @Override
     public void dispose() {
+
+        context = null;
     }
 
     @Override
