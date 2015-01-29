@@ -8,11 +8,9 @@
 bin/GooglePlusANE.app.dSYM/Contents/Info.plist
 GooglePlus.ane
 GooglePlus.swc
-*.iml
-*.gradle
-*.properties
-*.bat
-.idea
-android/gradle
-android/gradlew
-proguard-rules.pro
+android/.classpath
+android/AndroidManifest.xml
+android/bin
+android/gen
+android/proguard-project.txt
+android/project.properties

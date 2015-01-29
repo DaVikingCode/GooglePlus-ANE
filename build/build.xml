@@ -36,24 +36,24 @@
 		<delete dir="../android/temp" />
 		<mkdir dir="../android/temp/classes" />
 
-		<javac srcdir="../android/app/src" destdir="../android/temp/classes" includeantruntime="false">
+		<javac srcdir="../android/src" destdir="../android/temp/classes" includeantruntime="false">
 			<classpath>
 				<pathelement location="${android.sdk}/android.jar" />
-				<pathelement location="../android/app/libs/FlashRuntimeExtensions.jar" />
-				<pathelement location="../android/app/libs/android-support-v4.jar" />
-				<pathelement location="../android/app/libs/google-play-services.jar" />
+				<pathelement location="../android/libs/FlashRuntimeExtensions.jar" />
+				<pathelement location="../android/libs/android-support-v4.jar" />
+				<pathelement location="../android/libs/google-play-services.jar" />
 			</classpath>
 		</javac>
 		
 		<mkdir dir="../android/temp/zip" />
-		<unzip src="../android/app/libs/android-support-v4.jar" dest="../android/temp/zip"/>
-		<unzip src="../android/app/libs/google-play-services.jar" dest="../android/temp/zip"/>
+		<unzip src="../android/libs/android-support-v4.jar" dest="../android/temp/zip"/>
+		<unzip src="../android/libs/google-play-services.jar" dest="../android/temp/zip"/>
 		<copydir src="../android/temp/zip/com" dest="../android/temp/classes/com"/>
 
 		<mkdir dir="../temp/android/" />
 		<jar basedir="../android/temp/classes" destfile="../temp/android/${name}AndroidExtension.jar" />
 		<copy todir="../temp/android/res/">
-			<fileset dir="../android/app/res" />
+			<fileset dir="../android/res" />
 		</copy>
 		<delete dir="../android/temp" />
 	</target>
