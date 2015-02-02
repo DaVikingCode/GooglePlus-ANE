@@ -258,6 +258,7 @@
     <supports-screens android:normalScreens="true"/>
     <uses-feature android:required="true" android:name="android.hardware.touchscreen.multitouch"/>
     <application android:enabled="true">
+    	<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
     	<activity android:excludeFromRecents="false">
     		<intent-filter>
     			<action android:name="android.intent.action.MAIN"/>

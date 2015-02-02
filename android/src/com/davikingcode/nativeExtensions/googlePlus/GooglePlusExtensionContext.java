@@ -1,15 +1,13 @@
 package com.davikingcode.nativeExtensions.googlePlus;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import android.content.Intent;
-import android.util.Log;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.davikingcode.nativeExtensions.googlePlus.functions.GooglePlusLoginFunction;
-
-import java.lang.Override;
-import java.util.HashMap;
-import java.util.Map;
 
 public class GooglePlusExtensionContext extends FREContext {
 
