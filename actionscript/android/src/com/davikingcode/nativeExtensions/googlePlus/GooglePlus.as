@@ -121,5 +121,10 @@ package com.davikingcode.nativeExtensions.googlePlus {
 			return extensionContext.call("getUserID") as String;
 		}
 
+		public function debuggerHelper():void {
+
+			extensionContext.call("debuggerHelper");
+		}
+
 	}
 }

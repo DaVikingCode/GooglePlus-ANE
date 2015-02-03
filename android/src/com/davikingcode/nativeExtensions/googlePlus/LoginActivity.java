@@ -11,20 +11,12 @@ import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 
 public class LoginActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-	
-	private static final int DIALOG_GET_GOOGLE_PLAY_SERVICES = 1;
-	
-	private static final int REQUEST_CODE_GET_GOOGLE_PLAY_SERVICES = 2;
-	
-    private GooglePlusExtensionContext _context = null;
     
     private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        _context = GooglePlusExtension.context;
         
         mGoogleApiClient = new GoogleApiClient.Builder(this).addApi(Plus.API).addScope(Plus.SCOPE_PLUS_PROFILE).addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
         

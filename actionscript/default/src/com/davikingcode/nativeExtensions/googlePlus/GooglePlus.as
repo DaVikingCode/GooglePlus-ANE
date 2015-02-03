@@ -46,5 +46,8 @@ package com.davikingcode.nativeExtensions.googlePlus {
 		public function getUserID():String {
 			return "";
 		}
+
+		public function debuggerHelper():void {
+		}
 	}
 }

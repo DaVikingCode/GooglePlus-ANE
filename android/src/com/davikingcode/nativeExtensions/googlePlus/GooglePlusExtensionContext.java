@@ -7,6 +7,7 @@ import android.content.Intent;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
+import com.davikingcode.nativeExtensions.googlePlus.functions.DebuggerHelperFunction;
 import com.davikingcode.nativeExtensions.googlePlus.functions.GooglePlusLoginFunction;
 
 public class GooglePlusExtensionContext extends FREContext {
@@ -21,6 +22,7 @@ public class GooglePlusExtensionContext extends FREContext {
         Map<String, FREFunction> functionMap = new HashMap<String, FREFunction>();
 
         functionMap.put("login", new GooglePlusLoginFunction());
+        functionMap.put("debuggerHelper", new DebuggerHelperFunction());
 
         return functionMap;
     }
