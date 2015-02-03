@@ -1,6 +1,7 @@
 package com.davikingcode.nativeExtensions.googlePlus;
 
 import android.app.Activity;
+import android.content.IntentSender.SendIntentException;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -10,7 +11,11 @@ import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 
 public class LoginActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-
+	
+	private static final int DIALOG_GET_GOOGLE_PLAY_SERVICES = 1;
+	
+	private static final int REQUEST_CODE_GET_GOOGLE_PLAY_SERVICES = 2;
+	
     private GooglePlusExtensionContext _context = null;
     
     private GoogleApiClient mGoogleApiClient;
@@ -21,13 +26,21 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
 
         _context = GooglePlusExtension.context;
         
-        mGoogleApiClient = new GoogleApiClient.Builder(this).addApi(Plus.API).addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this).addApi(Plus.API).addScope(Plus.SCOPE_PLUS_PROFILE).addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
         
         Log.d("GooglePlusANE", "mGoogleApiClient created");
-        
+    }
+    
+    @Override
+    public void onStart() {
+        super.onStart();
         mGoogleApiClient.connect();
-        
-        Log.d("GooglePlusANE", "mGoogleApiClient connect");
+    }
+
+    @Override
+    public void onStop() {
+        mGoogleApiClient.disconnect();
+        super.onStop();
     }
     
    @Override
@@ -52,6 +65,21 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
     @Override
     public void onConnectionFailed(ConnectionResult result) {
     	
-    	Log.d("GooglePlusANE", "onConnectionFailed!!!!!");
+    	Log.d("GooglePlusANE", "onConnectionFailed! code: " + Integer.toString(result.getErrorCode()) + " object: " + result.toString());
+    	
+    	if (result.hasResolution()) {
+    		
+    		try {
+    			
+    			result.startResolutionForResult(this, ConnectionResult.SIGN_IN_REQUIRED);
+    			Log.d("GooglePlusANE", "onConnectionFailed! We're in the try");
+    			
+    		} catch (SendIntentException e) {
+    			
+    			mGoogleApiClient.connect();
+    			
+    			Log.d("GooglePlusANE", "onConnectionFailed! Error sending the resolution Intent, connect() again.");
+    		}
+    	}
     }
 }
