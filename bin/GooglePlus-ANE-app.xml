@@ -250,6 +250,8 @@
   <android>
     <manifestAdditions><![CDATA[<manifest>
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -265,7 +267,11 @@
     			<category android:name="android.intent.category.LAUNCHER"/>
     		</intent-filter>
     	</activity>
-    	<activity android:name="com.davikingcode.nativeExtensions.googlePlus.LoginActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"></activity>
+    	<activity android:name="com.davikingcode.nativeExtensions.googlePlus.LoginActivity" android:exported="false" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
     </application>
   </manifest>]]></manifestAdditions>
   </android>

@@ -1,6 +1,7 @@
 package com.davikingcode.nativeExtensions.googlePlus;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,8 @@ import com.google.android.gms.plus.model.people.Person;
 public class LoginActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     
     private GoogleApiClient mGoogleApiClient;
+    
+    private static final int REQUEST_CODE_SIGN_IN = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +41,32 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
    @Override
     public void onConnected(Bundle connectionHint) {
     	
-    	Log.d("GooglePlusANE", "Connected!!!!!");
+    	GooglePlusExtension.context.dispatchStatusEventAsync("LOGIN_SUCCESSED", "");
     	
     	Person person = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
     	
     	if (person != null)
-    		Log.d("GooglePlusANE", "Perso: " + person.getId());
+    		Log.d("GooglePlusANE", "Perso: " + person.getDisplayName());
     	else
     		Log.d("GooglePlusANE", "Perso: null?");
     }
+   
+   @Override
+   public void onActivityResult(int requestCode, int resultCode, Intent data) {
+       if (requestCode == REQUEST_CODE_SIGN_IN) {
+
+           if (resultCode == RESULT_OK && !mGoogleApiClient.isConnected() && !mGoogleApiClient.isConnecting())
+               mGoogleApiClient.connect();
+               
+           else {
+
+               if (resultCode == RESULT_CANCELED)
+            	   Log.d("GooglePlusANE", "RESULT_CANCELED!!!!!");
+               else
+            	   Log.d("GooglePlusANE", "sign_in_error_status!!");
+           }
+       }
+   }
     
     @Override
     public void onConnectionSuspended(int cause) {
@@ -63,7 +83,7 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
     		
     		try {
     			
-    			result.startResolutionForResult(this, ConnectionResult.SIGN_IN_REQUIRED);
+    			result.startResolutionForResult(this, REQUEST_CODE_SIGN_IN);
     			Log.d("GooglePlusANE", "onConnectionFailed! We're in the try");
     			
     		} catch (SendIntentException e) {
