@@ -12,6 +12,8 @@ import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 
 public class LoginActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+	
+	static public boolean isConnected = false;
     
     private GoogleApiClient mGoogleApiClient;
     
@@ -49,6 +51,10 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
     		Log.d("GooglePlusANE", "Perso: " + person.getDisplayName());
     	else
     		Log.d("GooglePlusANE", "Perso: null?");
+    	
+    	isConnected = true;
+    	
+    	finish();
     }
    
    @Override

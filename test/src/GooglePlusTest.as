@@ -67,7 +67,7 @@ package {
 
 		private function _login(mEvt:MouseEvent):void {
 			
-			//if (!_googlePlus.isAuthenticated())
+			if (!_googlePlus.isAuthenticated())
 				_googlePlus.login(_KEY);
 			/*else
 				_googlePlus.disconnect();*/

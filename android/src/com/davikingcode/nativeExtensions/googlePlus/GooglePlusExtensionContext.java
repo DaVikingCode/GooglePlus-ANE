@@ -8,7 +8,9 @@ import android.content.Intent;
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.davikingcode.nativeExtensions.googlePlus.functions.DebuggerHelperFunction;
-import com.davikingcode.nativeExtensions.googlePlus.functions.GooglePlusLoginFunction;
+import com.davikingcode.nativeExtensions.googlePlus.functions.IsAuthenticatedFunction;
+import com.davikingcode.nativeExtensions.googlePlus.functions.LoginFunction;
+import com.davikingcode.nativeExtensions.googlePlus.functions.ShareURLFunction;
 
 public class GooglePlusExtensionContext extends FREContext {
 
@@ -21,8 +23,10 @@ public class GooglePlusExtensionContext extends FREContext {
 
         Map<String, FREFunction> functionMap = new HashMap<String, FREFunction>();
 
-        functionMap.put("login", new GooglePlusLoginFunction());
+        functionMap.put("login", new LoginFunction());
+        functionMap.put("isAuthenticated", new IsAuthenticatedFunction());
         functionMap.put("debuggerHelper", new DebuggerHelperFunction());
+        functionMap.put("shareURL", new ShareURLFunction());
 
         return functionMap;
     }
@@ -30,6 +34,13 @@ public class GooglePlusExtensionContext extends FREContext {
     public void launchLoginActivity() {
 
         Intent i = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
+
+        getActivity().startActivity(i);
+    }
+    
+    public void launchShareURLActivity() {
+
+        Intent i = new Intent(getActivity().getApplicationContext(), ShareURLActivity.class);
 
         getActivity().startActivity(i);
     }
