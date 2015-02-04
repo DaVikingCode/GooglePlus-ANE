@@ -38,9 +38,12 @@ public class GooglePlusExtensionContext extends FREContext {
         getActivity().startActivity(i);
     }
     
-    public void launchShareURLActivity() {
+    public void launchShareURLActivity(String url, String text) {
 
         Intent i = new Intent(getActivity().getApplicationContext(), ShareURLActivity.class);
+        
+        i.putExtra(ShareURLActivity.extraPrefix + ".url", url);
+        i.putExtra(ShareURLActivity.extraPrefix + ".text", text);
 
         getActivity().startActivity(i);
     }

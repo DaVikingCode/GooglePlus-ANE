@@ -10,8 +10,11 @@ public class ShareURLFunction extends BaseFunction {
     public FREObject call(FREContext context, FREObject[] args) {
 
         super.call(context, args);
+        
+        String url = getStringFromFREObject(args[0]);
+        String text = getStringFromFREObject(args[1]);
 
-        GooglePlusExtension.context.launchShareURLActivity();
+        GooglePlusExtension.context.launchShareURLActivity(url, text);
 
         return null;
     }
