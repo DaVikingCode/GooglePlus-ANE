@@ -15,7 +15,7 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
 	
 	static public boolean isConnected = false;
     
-    private GoogleApiClient mGoogleApiClient;
+    static public GoogleApiClient mGoogleApiClient;
     
     private static final int REQUEST_CODE_SIGN_IN = 1;
 
@@ -24,20 +24,12 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
         super.onCreate(savedInstanceState);
         
         mGoogleApiClient = new GoogleApiClient.Builder(this).addApi(Plus.API).addScope(Plus.SCOPE_PLUS_PROFILE).addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
-        
-        Log.d("GooglePlusANE", "mGoogleApiClient created");
     }
     
     @Override
     public void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
-    }
-
-    @Override
-    public void onStop() {
-        mGoogleApiClient.disconnect();
-        super.onStop();
     }
     
    @Override
@@ -49,8 +41,6 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
     	
     	if (person != null)
     		Log.d("GooglePlusANE", "Perso: " + person.getDisplayName());
-    	else
-    		Log.d("GooglePlusANE", "Perso: null?");
     	
     	isConnected = true;
     	
@@ -59,6 +49,7 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
    
    @Override
    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	   
        if (requestCode == REQUEST_CODE_SIGN_IN) {
 
            if (resultCode == RESULT_OK && !mGoogleApiClient.isConnected() && !mGoogleApiClient.isConnecting())
@@ -67,7 +58,7 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
            else {
 
                if (resultCode == RESULT_CANCELED)
-            	   Log.d("GooglePlusANE", "RESULT_CANCELED!!!!!");
+            	   finish();
                else
             	   Log.d("GooglePlusANE", "sign_in_error_status!!");
            }
