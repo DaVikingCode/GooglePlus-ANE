@@ -232,10 +232,6 @@
 			                <key>CFBundleURLTypes</key>
 							<array>
 								<dict>
-									<key>CFBundleTypeRole</key>
-									<string>Editor</string>
-									<key>CFBundleURLName</key>
-									<string>com.davikingcode.GooglePlusANE</string>
 									<key>CFBundleURLSchemes</key>
 									<array>
 										<string>com.davikingcode.GooglePlusANE</string>
@@ -252,9 +248,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-    <uses-configuration android:reqFiveWayNav="true"/>
-    <supports-screens android:normalScreens="true"/>
-    <uses-feature android:required="true" android:name="android.hardware.touchscreen.multitouch"/>
     <application android:enabled="true">
     	<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
     	<activity android:excludeFromRecents="false">
@@ -263,21 +256,9 @@
     			<category android:name="android.intent.category.LAUNCHER"/>
     		</intent-filter>
     	</activity>
-    	<activity android:name="com.davikingcode.nativeExtensions.googlePlus.LoginActivity" android:exported="false" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity android:name="com.davikingcode.nativeExtensions.googlePlus.ShareURLActivity" android:exported="false" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity android:name="com.davikingcode.nativeExtensions.googlePlus.DisconnectActivity" android:exported="false" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
+    	<activity android:name="com.davikingcode.nativeExtensions.googlePlus.LoginActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"></activity>
+        <activity android:name="com.davikingcode.nativeExtensions.googlePlus.ShareURLActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"></activity>
+        <activity android:name="com.davikingcode.nativeExtensions.googlePlus.DisconnectActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"></activity>
     </application>
   </manifest>]]></manifestAdditions>
   </android>
