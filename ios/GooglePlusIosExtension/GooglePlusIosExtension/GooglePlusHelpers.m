@@ -89,6 +89,8 @@
 - (void) signOut {
     
     [[GPPSignIn sharedInstance] signOut];
+    
+    [self dispatchEvent:@"DISCONNECTED" withParams:@""];
 }
 
 - (void) disconnect {

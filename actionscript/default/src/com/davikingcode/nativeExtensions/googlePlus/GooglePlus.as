@@ -17,15 +17,34 @@ package com.davikingcode.nativeExtensions.googlePlus {
 
 		public function GooglePlus() {
 
+			if (_instance)
+				throw new Error("GooglePlus is already initialized.");
+
 			_instance = this;
 		}
 
-		public function login(key:String, fetchGoogleUserEmail:Boolean = false, fetchGooglePlusUser:Boolean = false, fetchGoogleUserID:Boolean = false):void {
+		/**
+		* Login to the Google+ account via its app. If the user doesn't have the Google+ app, the login is done via the Google+ website.
+		* The user is redirected to its app if the login process is cancelled or completed.
+		* @param iOSKey The client ID of the app from the Google APIs console <b>(for iOS only)</b>. Not considered by Android.
+		* @param fetchGoogleUserEmail If true we can read user's mail <i>(iOS permission only)</i>.
+		* @param fetchGoogleUserEmail If true know who you are on Google.
+		* @param fetchGoogleUserID If true we can read user's ID <i>(iOS permission only)</i>.
+		*/
+		public function login(iOSKey:String, fetchGoogleUserEmail:Boolean = false, fetchGooglePlusUser:Boolean = false, fetchGoogleUserID:Boolean = false):void {
 		}
 
+		/**
+		* Removes the OAuth 2.0 token from the keychain, dispatch <code>GooglePlusEvent.DISCONNECTED</code>.
+		*/
 		public function signOut():void {
 		}
 
+		/**
+		* Disconnects the user from the app and revokes previous authentication. If the operation succeeds, the OAuth 2.0 token is also removed from keychain.
+		* The token is needed to disconnect so do not call signOut if disconnect is to be called.
+		* Dispatch <code>GooglePlusEvent.DISCONNECTED</code> on success.
+		*/
 		public function disconnect():void {
 		}
 
@@ -33,12 +52,21 @@ package com.davikingcode.nativeExtensions.googlePlus {
 			return false;
 		}
 
+		/**
+		* Share an URL. Will dispatch a GooglePlusEvent.POST_SHARED on success or GooglePlusEvent.POST_NOT_SHARED if user canceled.
+		* @param url The URL to share.
+		* @param text Sets the text to prefill user's comment in the share dialog.
+		* @param useNativeShareDialog Use the <b>iOS</b> native share dialog without leaving the app, set it to false to share via the browser.
+		*/
 		public function shareURL(url:String, text:String = "", useNativeShareDialog:Boolean = true):void {
 		}
 
 		/*public function sharePost(title:String, description:String = "", thumbnailURL:String = "", useNativeShareDialog:Boolean = true):void {
 		}*/
 
+		/**
+		* Grab the user mail, only works if you set <i>shouldFetchGoogleUserEmail</i> to true when calling <code>login</code> method.
+		*/
 		public function getUserMail():String {
 			return "";
 		}

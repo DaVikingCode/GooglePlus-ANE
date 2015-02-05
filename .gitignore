@@ -6,6 +6,7 @@
 *.swf
 *.tmp
 bin/GooglePlusANE.app.dSYM/Contents/Info.plist
+docs
 GooglePlus.ane
 GooglePlus.swc
 android/.classpath
@@ -14,3 +15,4 @@ android/bin
 android/gen
 android/proguard-project.txt
 android/project.properties
+*.xcuserstate
