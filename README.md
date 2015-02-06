@@ -4,3 +4,6 @@ How to grab Android SHA1 key from .p12?
 - Type in: `keytool -v -list -keystore mycert.p12 -storetype pkcs12` where mycert.p12 is the filename of your .p12 key.
 - Enter keystore password (the one you used when exported .p12 key).
 - Copy sha1 fingerprint signature bytes text
+
+
+**Update your `lib/android/bin/dx.jar` from your AIR SDK with our version included with the ANE!!**
