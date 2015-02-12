@@ -61,8 +61,16 @@ package com.davikingcode.nativeExtensions.googlePlus {
 		public function shareURL(url:String, text:String = "", useNativeShareDialog:Boolean = true):void {
 		}
 
-		/*public function sharePost(title:String, description:String = "", thumbnailURL:String = "", useNativeShareDialog:Boolean = true):void {
-		}*/
+		/**
+		* Share a post. Will dispatch a GooglePlusEvent.POST_SHARED on success or GooglePlusEvent.POST_NOT_SHARED if user canceled.
+		* @param title The message's title.
+		* @param text Sets the text to prefill user's comment in the share dialog.
+		* @param description The message's description.
+		* @param thumbnailURL An image's URL showed only to the user when writing his message. Not showed on Google+.
+		* @param useNativeShareDialog Use the <b>iOS</b> native share dialog without leaving the app, set it to false to share via the browser.
+		*/
+		public function sharePost(title:String, text:String = "", description:String = "", thumbnailURL:String = "", useNativeShareDialog:Boolean = true):void {
+		}
 
 		/**
 		* Grab the user mail, only works if you set <i>shouldFetchGoogleUserEmail</i> to true when calling <code>login</code> method.

@@ -75,8 +75,11 @@ package {
 		
 		private function _shareRandomPost(mEvt:MouseEvent):void {
 			
-			if (_googlePlus.isAuthenticated())
-				_googlePlus.shareURL("https://github.com/DaVikingCode/Instagram-ANE", "An awesome free ANE");
+			if (_googlePlus.isAuthenticated()) {
+				
+				_googlePlus.sharePost("Da Viking Code", "Made with the Google+ ANE", "Freelance interactive & game developers", "http://davikingcode.com/images/logo.png");
+				//_googlePlus.shareURL("https://github.com/DaVikingCode/Instagram-ANE", "An awesome free ANE");
+			}
 		}
 
 		private function _loginSuccessed(gpEvt:GooglePlusEvent):void {

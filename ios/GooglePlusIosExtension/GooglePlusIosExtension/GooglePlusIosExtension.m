@@ -81,16 +81,19 @@ DEFINE_ANE_FUNCTION(sharePost) {
     NSString* title;
     [typeConverter FREGetObject:argv[0] asString:&title];
     
+    NSString* text;
+    [typeConverter FREGetObject:argv[1] asString:&text];
+    
     NSString* desc;
-    [typeConverter FREGetObject:argv[1] asString:&desc];
+    [typeConverter FREGetObject:argv[2] asString:&desc];
     
     NSString* url;
-    [typeConverter FREGetObject:argv[2] asString:&url];
+    [typeConverter FREGetObject:argv[3] asString:&url];
     
     uint32_t nativeShareDialog;
-    FREGetObjectAsBool(argv[3], &nativeShareDialog);
+    FREGetObjectAsBool(argv[4], &nativeShareDialog);
     
-    [googlePlusHelpers sharePostWithTitle:title andDescription:desc andThumbnailURL:url withNativeShareDialog:nativeShareDialog];
+    [googlePlusHelpers sharePostWithTitle:title andText:text andDescription:desc andThumbnailURL:url withNativeShareDialog:nativeShareDialog];
     
     return NULL;
 }

@@ -24,7 +24,7 @@
 - (BOOL) isAuthenticated;
 
 - (void) shareURL:(NSString *) url andPrefillText:(NSString *) prefillText withNativeShareDialog:(BOOL) useNativeShareDialog;
-- (void) sharePostWithTitle:(NSString *) title andDescription:(NSString *) description andThumbnailURL:(NSString *) thumbnailURL withNativeShareDialog:(BOOL) useNativeShareDialog;
+- (void) sharePostWithTitle:(NSString *) title andText:(NSString*) text andDescription:(NSString *) description andThumbnailURL:(NSString *) thumbnailURL withNativeShareDialog:(BOOL) useNativeShareDialog;
 
 - (NSString *) getUserMail;
 - (NSString *) getUserID;

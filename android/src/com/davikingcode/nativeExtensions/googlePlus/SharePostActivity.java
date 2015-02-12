@@ -8,15 +8,17 @@ import android.util.Log;
 
 import com.google.android.gms.plus.PlusShare;
 
-public class ShareURLActivity extends Activity {
+public class SharePostActivity extends Activity {
 	
-	static public String extraPrefix = "com.davikingcode.nativeExtensions.googlePlus.ShareURLActivity";
+	static public String extraPrefix = "com.davikingcode.nativeExtensions.googlePlus.SharePostActivity";
 	
 	static private final int REQUEST_CODE_INTERACTIVE_POST = 1;
 	static private final int REQUEST_CODE_GET_GOOGLE_PLAY_SERVICES = 2;
 	
-	private String _url;
+	private String _title;
 	private String _text;
+	private String _description;
+	private String _thumbnailURL;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +26,10 @@ public class ShareURLActivity extends Activity {
 		
 		Bundle extras = this.getIntent().getExtras();
 		
-		 _url = extras.getString(extraPrefix + ".url");
+		_title = extras.getString(extraPrefix + ".title");
 		_text = extras.getString(extraPrefix + ".text");
+		_description = extras.getString(extraPrefix + ".description");
+		_thumbnailURL = extras.getString(extraPrefix + ".thumbnailURL");
 		
 		startActivityForResult(getInteractivePostIntent(), REQUEST_CODE_INTERACTIVE_POST);
 	}
@@ -57,16 +61,13 @@ public class ShareURLActivity extends Activity {
     }
 	
 	private Intent getInteractivePostIntent() {
-		
-		String action = "/?view=true";
-        Uri callToActionUrl = Uri.parse(_url);
-        String callToActionDeepLinkId = _url + action;
 
         PlusShare.Builder builder = new PlusShare.Builder(this);
+        
+        builder.addCallToAction("VIEW", Uri.parse(""), "/?view=true");
 
-        builder.addCallToAction("VIEW", callToActionUrl, callToActionDeepLinkId);
-
-        builder.setContentUrl(Uri.parse(_url));
+        builder.setContentDeepLinkId("", _title, _description, Uri.parse(_thumbnailURL));
+        
         builder.setText(_text);
 
         return builder.getIntent();

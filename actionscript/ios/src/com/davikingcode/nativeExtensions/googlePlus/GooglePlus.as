@@ -84,10 +84,10 @@ package com.davikingcode.nativeExtensions.googlePlus {
 			extensionContext.call("shareURL", url, text, useNativeShareDialog);
 		}
 
-		/*public function sharePost(title:String, description:String = "", thumbnailURL:String = "", useNativeShareDialog:Boolean = true):void {
+		public function sharePost(title:String, text:String = "", description:String = "", thumbnailURL:String = "", useNativeShareDialog:Boolean = true):void {
 
-			extensionContext.call("sharePost", title, description, thumbnailURL, useNativeShareDialog);
-		}*/
+			extensionContext.call("sharePost", title, text, description, thumbnailURL, useNativeShareDialog);
+		}
 
 		public function getUserMail():String {
 

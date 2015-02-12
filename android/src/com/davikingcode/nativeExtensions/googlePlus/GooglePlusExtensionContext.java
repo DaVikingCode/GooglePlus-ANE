@@ -13,6 +13,7 @@ import com.davikingcode.nativeExtensions.googlePlus.functions.GetUserIDFunction;
 import com.davikingcode.nativeExtensions.googlePlus.functions.GetUserMailFunction;
 import com.davikingcode.nativeExtensions.googlePlus.functions.IsAuthenticatedFunction;
 import com.davikingcode.nativeExtensions.googlePlus.functions.LoginFunction;
+import com.davikingcode.nativeExtensions.googlePlus.functions.SharePostFunction;
 import com.davikingcode.nativeExtensions.googlePlus.functions.ShareURLFunction;
 import com.davikingcode.nativeExtensions.googlePlus.functions.SignOutFunction;
 
@@ -31,6 +32,7 @@ public class GooglePlusExtensionContext extends FREContext {
         functionMap.put("isAuthenticated", new IsAuthenticatedFunction());
         functionMap.put("debuggerHelper", new DebuggerHelperFunction());
         functionMap.put("shareURL", new ShareURLFunction());
+        functionMap.put("sharePost", new SharePostFunction());
         functionMap.put("disconnect", new DisconnectFunction());
         functionMap.put("signOut", new SignOutFunction());
         functionMap.put("getUserMail", new GetUserMailFunction());
@@ -52,6 +54,18 @@ public class GooglePlusExtensionContext extends FREContext {
         
         i.putExtra(ShareURLActivity.extraPrefix + ".url", url);
         i.putExtra(ShareURLActivity.extraPrefix + ".text", text);
+
+        getActivity().startActivity(i);
+    }
+    
+    public void launchSharePostActivity(String title, String text, String description, String thumbnailURL) {
+
+        Intent i = new Intent(getActivity().getApplicationContext(), SharePostActivity.class);
+        
+        i.putExtra(ShareURLActivity.extraPrefix + ".title", title);
+        i.putExtra(ShareURLActivity.extraPrefix + ".text", text);
+        i.putExtra(ShareURLActivity.extraPrefix + ".description", description);
+        i.putExtra(ShareURLActivity.extraPrefix + ".thumbnailURL", thumbnailURL);
 
         getActivity().startActivity(i);
     }
