@@ -6,7 +6,6 @@ import java.security.NoSuchAlgorithmException;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.content.res.Resources;
 import android.util.Log;
 
 import com.adobe.fre.FREContext;

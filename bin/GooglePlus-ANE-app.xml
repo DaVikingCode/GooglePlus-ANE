@@ -240,9 +240,6 @@
 							</array>]]></InfoAdditions>
     <requestedDisplayResolution>high</requestedDisplayResolution>
   </iPhone>
-  <extensions>
-    <extensionID>com.davikingcode.nativeExtensions.GooglePlus</extensionID>
-  </extensions>
   <android>
     <manifestAdditions><![CDATA[<manifest>
     <uses-permission android:name="android.permission.INTERNET" />
@@ -262,5 +259,8 @@
     </application>
   </manifest>]]></manifestAdditions>
   </android>
+  <extensions>
+    <extensionID>com.davikingcode.nativeExtensions.GooglePlus</extensionID>
+  </extensions>
 </application>
 

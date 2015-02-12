@@ -64,6 +64,7 @@ public class ShareURLActivity extends Activity {
 
         PlusShare.Builder builder = new PlusShare.Builder(this);
 
+        //even for a simple URL share, it seems that we must use addCallToAction
         builder.addCallToAction("VIEW", callToActionUrl, callToActionDeepLinkId);
 
         builder.setContentUrl(Uri.parse(_url));
