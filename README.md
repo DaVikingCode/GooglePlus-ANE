@@ -5,5 +5,5 @@ How to grab Android SHA1 key from .p12?
 - Enter keystore password (the one you used when exported .p12 key).
 - Copy sha1 fingerprint signature bytes text
 
-
-**Update your `lib/android/bin/dx.jar` from your AIR SDK with our version included with the ANE!!**
+https://developers.google.com/+/mobile/android/share/interactive-post#configure_the_share_dialog  
+https://developers.google.com/+/mobile/ios/share/interactive-post#configure_your_share_dialog

@@ -64,9 +64,14 @@ public class SharePostActivity extends Activity {
 
         PlusShare.Builder builder = new PlusShare.Builder(this);
         
-        builder.addCallToAction("VIEW", Uri.parse(""), "/?view=true");
+        builder.addCallToAction("CREATE_ITEM", Uri.parse("http://plus.google.com/pages/create"), "/pages/create");
+        builder.setContentUrl(Uri.parse("https://plus.google.com/pages/"));
 
-        builder.setContentDeepLinkId("", _title, _description, Uri.parse(_thumbnailURL));
+        builder.setContentDeepLinkId("/pages/", _title, _description, null);
+        
+        /*builder.addCallToAction("VIEW", Uri.parse("http://davikingcode.com"), "/?view=true");
+
+        builder.setContentDeepLinkId("rest=1234567", _title, _description, Uri.parse(_thumbnailURL));*/
         
         builder.setText(_text);
 
