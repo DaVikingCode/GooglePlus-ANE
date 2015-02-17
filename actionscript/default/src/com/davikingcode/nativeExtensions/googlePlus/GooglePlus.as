@@ -83,6 +83,10 @@ package com.davikingcode.nativeExtensions.googlePlus {
 			return "";
 		}
 
+		/**
+		* <b>Android only!</b> Print into the <a href="http://developer.android.com/tools/debugging/ddms.html">DDMS</a> or <a href="http://developer.android.com/tools/help/monitor.html">Device Monitor</a> the <b>SHA1 key</b> and the 
+		* <b>package</b> that must be set inside the <a href="https://console.developers.google.com/project">Google+ console</a>.
+		*/
 		public function debuggerHelper():void {
 		}
 	}
