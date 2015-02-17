@@ -57,17 +57,12 @@ public class ShareURLActivity extends Activity {
     }
 	
 	private Intent getInteractivePostIntent() {
-		
-		String action = "/?view=true";
-        Uri callToActionUrl = Uri.parse(_url);
-        String callToActionDeepLinkId = _url + action;
 
         PlusShare.Builder builder = new PlusShare.Builder(this);
-
-        builder.addCallToAction("VIEW", callToActionUrl, callToActionDeepLinkId);
-
-        builder.setContentUrl(Uri.parse(_url));
+        
         builder.setText(_text);
+        builder.setType("text/plain");
+        builder.setContentUrl(Uri.parse(_url));
 
         return builder.getIntent();
     }

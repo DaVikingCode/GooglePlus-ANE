@@ -62,10 +62,10 @@ public class GooglePlusExtensionContext extends FREContext {
 
         Intent i = new Intent(getActivity().getApplicationContext(), SharePostActivity.class);
         
-        i.putExtra(ShareURLActivity.extraPrefix + ".title", title);
-        i.putExtra(ShareURLActivity.extraPrefix + ".text", text);
-        i.putExtra(ShareURLActivity.extraPrefix + ".description", description);
-        i.putExtra(ShareURLActivity.extraPrefix + ".thumbnailURL", thumbnailURL);
+        i.putExtra(SharePostActivity.extraPrefix + ".title", title);
+        i.putExtra(SharePostActivity.extraPrefix + ".text", text);
+        i.putExtra(SharePostActivity.extraPrefix + ".description", description);
+        i.putExtra(SharePostActivity.extraPrefix + ".thumbnailURL", thumbnailURL);
 
         getActivity().startActivity(i);
     }

@@ -60,12 +60,6 @@
     
     id<GPPShareBuilder> shareBuilder = useNativeShareDialog ? [[GPPShare sharedInstance] nativeShareDialog] : [[GPPShare sharedInstance] shareDialog];
     
-    NSString *action = @"/?view=true";
-    NSURL *callToActionUrl = [[NSURL alloc] initWithString:url];
-    NSString *callToActionDeepLinkId = [url stringByAppendingString:action];
-    
-    [shareBuilder setCallToActionButtonWithLabel:@"VIEW" URL:callToActionUrl deepLinkID:callToActionDeepLinkId];
-    
     [shareBuilder setURLToShare:[NSURL URLWithString:url]];
     [shareBuilder setPrefillText:prefillText];
     
@@ -80,7 +74,7 @@
     
     [shareBuilder setPrefillText:text];
     
-    [shareBuilder setContentDeepLinkID:@"rest=1234567"];
+    [shareBuilder setContentDeepLinkID:@"/sample"];
     
     [shareBuilder open];
 }
