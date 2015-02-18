@@ -11,8 +11,10 @@ public class LoginFunction extends BaseFunction implements FREFunction {
     public FREObject call(FREContext context, FREObject[] args) {
 
         super.call(context, args);
+        
+        Boolean extendedPermissions = getBooleanFromFREObject(args[1]);
 
-        GooglePlusExtension.context.launchLoginActivity();
+        GooglePlusExtension.context.launchLoginActivity(extendedPermissions);
 
         return null;
     }

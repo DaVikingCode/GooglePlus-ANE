@@ -18,7 +18,7 @@
 
 - (id) initWithContext:(FREContext) context;
 
-- (void) loginWithKey:(NSString *) key andShouldFetchGoogleUserEmail:(BOOL) fetchGoogleUserEmail andShouldFetchGooglePlusUser:(BOOL) fetchGooglePlusUser andShouldFetchGoogleUserID:(BOOL) fetchGoogleUserID;
+- (void) loginWithKey:(NSString *) key andExtendedPermissions:(BOOL) extended;
 - (void) signOut;
 - (void) disconnect;
 - (BOOL) isAuthenticated;

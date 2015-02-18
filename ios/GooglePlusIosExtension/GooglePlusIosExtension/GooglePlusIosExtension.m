@@ -23,16 +23,10 @@ DEFINE_ANE_FUNCTION(login) {
     NSString* key;
     [typeConverter FREGetObject:argv[0] asString:&key];
     
-    uint32_t fetchGoogleUserEmail;
-    FREGetObjectAsBool(argv[1], &fetchGoogleUserEmail);
+    uint32_t extended;
+    FREGetObjectAsBool(argv[1], &extended);
     
-    uint32_t fetchGooglePlusUser;
-    FREGetObjectAsBool(argv[2], &fetchGooglePlusUser);
-    
-    uint32_t fetchGoogleUserID;
-    FREGetObjectAsBool(argv[3], &fetchGoogleUserID);
-    
-    [googlePlusHelpers loginWithKey:key andShouldFetchGoogleUserEmail:fetchGoogleUserEmail andShouldFetchGooglePlusUser:fetchGooglePlusUser andShouldFetchGoogleUserID:fetchGoogleUserID];
+    [googlePlusHelpers loginWithKey:key andExtendedPermissions:extended];
     
     return NULL;
 }

@@ -20,15 +20,13 @@
 
 - (id) initWithContext:(FREContext) context {
     
-    if (self = [super init]) {
-        
+    if (self = [super init])
         ctx = context;
-    }
     
     return self;
 }
 
-- (void) loginWithKey:(NSString *) key andShouldFetchGoogleUserEmail:(BOOL) fetchGoogleUserEmail andShouldFetchGooglePlusUser:(BOOL) fetchGooglePlusUser andShouldFetchGoogleUserID:(BOOL) fetchGoogleUserID {
+- (void) loginWithKey:(NSString *) key andExtendedPermissions:(BOOL) extended {
     
     GPPSignIn *signIn = [GPPSignIn sharedInstance];
     
@@ -36,9 +34,11 @@
     
     signIn.scopes = [[NSArray alloc] initWithObjects:kGTLAuthScopePlusLogin, nil];
     
-    signIn.shouldFetchGoogleUserEmail = fetchGoogleUserEmail;
-    signIn.shouldFetchGooglePlusUser = fetchGooglePlusUser;
-    signIn.shouldFetchGoogleUserID = fetchGoogleUserID;
+    if (extended) {
+        signIn.shouldFetchGoogleUserEmail = TRUE;
+        signIn.shouldFetchGooglePlusUser = TRUE;
+        signIn.shouldFetchGoogleUserID = TRUE;
+    }
     
     [signIn setDelegate:self];
     [[GPPShare sharedInstance] setDelegate:self];

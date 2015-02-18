@@ -59,9 +59,9 @@ package com.davikingcode.nativeExtensions.googlePlus {
 			}
 		}
 
-		public function login(iOSKey:String, fetchGoogleUserEmail:Boolean = false, fetchGooglePlusUser:Boolean = false, fetchGoogleUserID:Boolean = false):void {
+		public function login(iOSKey:String, extended:Boolean = false):void {
 
-			extensionContext.call("login", iOSKey, fetchGoogleUserEmail, fetchGooglePlusUser, fetchGoogleUserID);
+			extensionContext.call("login", iOSKey, extended);
 		}
 
 		public function signOut():void {

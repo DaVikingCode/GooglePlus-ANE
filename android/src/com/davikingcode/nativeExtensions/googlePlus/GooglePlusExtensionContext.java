@@ -41,9 +41,11 @@ public class GooglePlusExtensionContext extends FREContext {
         return functionMap;
     }
 
-    public void launchLoginActivity() {
+    public void launchLoginActivity(Boolean extendedPermissions) {
 
         Intent i = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
+        
+        i.putExtra(LoginActivity.extraPrefix + ".extendedPermissions", extendedPermissions);
 
         getActivity().startActivity(i);
     }

@@ -19,15 +19,22 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
 	
     static public GoogleApiClient mGoogleApiClient;
     
+    static public String extraPrefix = "com.davikingcode.nativeExtensions.googlePlus.LoginActivity";
     
     private static final int REQUEST_CODE_SIGN_IN = 1;
     private static final int REQUEST_CODE_EMAIL = 2;
+    
+    private Boolean _extended;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        mGoogleApiClient = new GoogleApiClient.Builder(this).addApi(Plus.API).addScope(Plus.SCOPE_PLUS_PROFILE).addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
+        Bundle extras = this.getIntent().getExtras();
+		
+        _extended = extras.getBoolean(extraPrefix + ".extendedPermissions");
+        
+        mGoogleApiClient = new GoogleApiClient.Builder(this).addApi(Plus.API).addScope(_extended ? Plus.SCOPE_PLUS_LOGIN : Plus.SCOPE_PLUS_PROFILE).addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
     }
     
     @Override
