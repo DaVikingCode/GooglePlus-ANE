@@ -8,15 +8,15 @@ import android.util.Log;
 
 import com.google.android.gms.plus.PlusShare;
 
-public class ShareURLActivity extends Activity {
+public class ShareActivity extends Activity {
 	
-	static public String extraPrefix = "com.davikingcode.nativeExtensions.googlePlus.ShareURLActivity";
+	static public String extraPrefix = "com.davikingcode.nativeExtensions.googlePlus.ShareActivity";
 	
 	static private final int REQUEST_CODE_INTERACTIVE_POST = 1;
 	static private final int REQUEST_CODE_GET_GOOGLE_PLAY_SERVICES = 2;
 	
-	private String _url;
 	private String _text;
+	private String _url;
 	private String _imageURL;
 	
 	@Override
@@ -25,8 +25,8 @@ public class ShareURLActivity extends Activity {
 		
 		Bundle extras = this.getIntent().getExtras();
 		
-		 _url = extras.getString(extraPrefix + ".url");
 		_text = extras.getString(extraPrefix + ".text");
+		 _url = extras.getString(extraPrefix + ".url");
 		_imageURL = extras.getString(extraPrefix + ".imageURL");
 		
 		startActivityForResult(getInteractivePostIntent(), REQUEST_CODE_INTERACTIVE_POST);

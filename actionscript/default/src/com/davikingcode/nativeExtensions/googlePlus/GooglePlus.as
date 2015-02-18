@@ -52,11 +52,12 @@ package com.davikingcode.nativeExtensions.googlePlus {
 		}
 
 		/**
-		* Share an URL. Will dispatch a GooglePlusEvent.POST_SHARED on success or GooglePlusEvent.POST_NOT_SHARED if user canceled.
-		* @param url The URL to share.
+		* Share a prefilled text with an url and an image. Will dispatch a <i>GooglePlusEvent.POST_SHARED</i> on success or <i>GooglePlusEvent.POST_NOT_SHARED</i> if user canceled.
 		* @param text Sets the text to prefill user's comment in the share dialog.
+		* @param url The URL to share.
+		* @param bitmapData A bitmapData you want to share.
 		*/
-		public function shareURL(url:String, text:String = "", bitmapData:BitmapData = null):void {
+		public function share(text:String, url:String = "", bitmapData:BitmapData = null):void {
 		}
 
 		/**

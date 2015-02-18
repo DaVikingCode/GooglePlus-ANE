@@ -13,7 +13,7 @@ import com.davikingcode.nativeExtensions.googlePlus.functions.GetUserIDFunction;
 import com.davikingcode.nativeExtensions.googlePlus.functions.GetUserMailFunction;
 import com.davikingcode.nativeExtensions.googlePlus.functions.IsAuthenticatedFunction;
 import com.davikingcode.nativeExtensions.googlePlus.functions.LoginFunction;
-import com.davikingcode.nativeExtensions.googlePlus.functions.ShareURLFunction;
+import com.davikingcode.nativeExtensions.googlePlus.functions.ShareFunction;
 import com.davikingcode.nativeExtensions.googlePlus.functions.SignOutFunction;
 
 public class GooglePlusExtensionContext extends FREContext {
@@ -30,7 +30,7 @@ public class GooglePlusExtensionContext extends FREContext {
         functionMap.put("login", new LoginFunction());
         functionMap.put("isAuthenticated", new IsAuthenticatedFunction());
         functionMap.put("debuggerHelper", new DebuggerHelperFunction());
-        functionMap.put("shareURL", new ShareURLFunction());
+        functionMap.put("share", new ShareFunction());
         functionMap.put("disconnect", new DisconnectFunction());
         functionMap.put("signOut", new SignOutFunction());
         functionMap.put("getUserMail", new GetUserMailFunction());
@@ -48,13 +48,13 @@ public class GooglePlusExtensionContext extends FREContext {
         getActivity().startActivity(i);
     }
     
-    public void launchShareURLActivity(String url, String text, String imageURL) {
+    public void launchShareActivity(String text, String url, String imageURL) {
 
-        Intent i = new Intent(getActivity().getApplicationContext(), ShareURLActivity.class);
+        Intent i = new Intent(getActivity().getApplicationContext(), ShareActivity.class);
         
-        i.putExtra(ShareURLActivity.extraPrefix + ".url", url);
-        i.putExtra(ShareURLActivity.extraPrefix + ".text", text);
-        i.putExtra(ShareURLActivity.extraPrefix + ".imageURL", imageURL);
+        i.putExtra(ShareActivity.extraPrefix + ".text", text);
+        i.putExtra(ShareActivity.extraPrefix + ".url", url);
+        i.putExtra(ShareActivity.extraPrefix + ".imageURL", imageURL);
 
         getActivity().startActivity(i);
     }

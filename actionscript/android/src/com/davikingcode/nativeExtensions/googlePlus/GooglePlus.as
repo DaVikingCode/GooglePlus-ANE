@@ -89,7 +89,7 @@ package com.davikingcode.nativeExtensions.googlePlus {
 			return extensionContext.call("isAuthenticated") as Boolean;
 		}
 
-		public function shareURL(url:String, text:String = "", bitmapData:BitmapData = null):void {
+		public function share(text:String, url:String = "", bitmapData:BitmapData = null):void {
 
 			var image:String = "image" + new Date().time + ".jpg";
 
@@ -103,7 +103,7 @@ package com.davikingcode.nativeExtensions.googlePlus {
 				stream.close();
 			}
 
-			extensionContext.call("shareURL", " " + url, text, _file ? _file.url : "");
+			extensionContext.call("share", text, " " + url, _file ? _file.url : "");
 		}
 
 		public function getUserMail():String {

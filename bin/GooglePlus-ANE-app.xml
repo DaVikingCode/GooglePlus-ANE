@@ -255,8 +255,7 @@
         </intent-filter>
       </activity>
       <activity android:name="com.davikingcode.nativeExtensions.googlePlus.LoginActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
-      <activity android:name="com.davikingcode.nativeExtensions.googlePlus.ShareURLActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
-      <activity android:name="com.davikingcode.nativeExtensions.googlePlus.SharePostActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+      <activity android:name="com.davikingcode.nativeExtensions.googlePlus.ShareActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
       <activity android:name="com.davikingcode.nativeExtensions.googlePlus.DisconnectActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
     </application>
   </manifest>]]></manifestAdditions>

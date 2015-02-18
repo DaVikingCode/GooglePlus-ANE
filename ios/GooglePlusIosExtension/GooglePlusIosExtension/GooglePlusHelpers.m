@@ -56,12 +56,11 @@
         [self dispatchEvent:@"LOGIN_SUCCESSED" withParams:@""];
 }
 
-- (void) shareURL:(NSString *) url andPrefillText:(NSString *) prefillText withImage:(NSString *) imageUrl {
+- (void) shareText:(NSString *) text andURL:(NSString *) url withImage:(NSString *) imageUrl {
     
     id<GPPNativeShareBuilder> shareBuilder = [[GPPShare sharedInstance] nativeShareDialog];
     
-    //[shareBuilder setURLToShare:[NSURL URLWithString:url]];
-    [shareBuilder setPrefillText:[prefillText stringByAppendingString:url]];
+    [shareBuilder setPrefillText:[text stringByAppendingString:url]];
     
     NSURL *fileURL = [NSURL fileURLWithPath: [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:imageUrl]];
     

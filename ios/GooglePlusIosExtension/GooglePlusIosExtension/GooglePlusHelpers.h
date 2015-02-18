@@ -23,7 +23,7 @@
 - (void) disconnect;
 - (BOOL) isAuthenticated;
 
-- (void) shareURL:(NSString *) url andPrefillText:(NSString *) prefillText withImage:(NSString *) url;
+- (void) shareText:(NSString *) text andURL:(NSString *) url withImage:(NSString *) imageURL;
 
 - (NSString *) getUserMail;
 - (NSString *) getUserID;

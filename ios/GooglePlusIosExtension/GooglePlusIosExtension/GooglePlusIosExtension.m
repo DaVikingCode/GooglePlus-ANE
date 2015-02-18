@@ -53,19 +53,18 @@ DEFINE_ANE_FUNCTION(isAuthenticated) {
     return retBool;
 }
 
-DEFINE_ANE_FUNCTION(shareURL) {
-    
-    NSString* url;
-    [typeConverter FREGetObject:argv[0] asString:&url];
-    
+DEFINE_ANE_FUNCTION(share) {
     
     NSString* text;
-    [typeConverter FREGetObject:argv[1] asString:&text];
+    [typeConverter FREGetObject:argv[0] asString:&text];
+    
+    NSString* url;
+    [typeConverter FREGetObject:argv[1] asString:&url];
     
     NSString* imageURL;
     [typeConverter FREGetObject:argv[2] asString:&imageURL];
     
-    [googlePlusHelpers shareURL:url andPrefillText:text withImage:imageURL];
+    [googlePlusHelpers shareText:text andURL:url withImage:imageURL];
     
     return NULL;
 }
@@ -124,7 +123,7 @@ void GooglePlusContextInitializer(void* extData, const uint8_t* ctxType, FRECont
         MAP_FUNCTION(signOut, NULL),
         MAP_FUNCTION(disconnect, NULL),
         MAP_FUNCTION(isAuthenticated, NULL),
-        MAP_FUNCTION(shareURL, NULL),
+        MAP_FUNCTION(share, NULL),
         MAP_FUNCTION(getUserMail, NULL),
         MAP_FUNCTION(getUserID, NULL)
     };

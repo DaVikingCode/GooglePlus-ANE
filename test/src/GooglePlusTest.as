@@ -79,7 +79,7 @@ package {
 		private function _shareRandomPost(mEvt:MouseEvent):void {
 			
 			if (_googlePlus.isAuthenticated())
-				_googlePlus.shareURL("https://github.com/DaVikingCode/Instagram-ANE", "An awesome ANE", new _logoBitmap().bitmapData);
+				_googlePlus.share("An awesome ANE for Instagram", "http://github.com/DaVikingCode/Instagram-ANE", new _logoBitmap().bitmapData);
 		}
 
 		private function _loginSuccessed(gpEvt:GooglePlusEvent):void {
