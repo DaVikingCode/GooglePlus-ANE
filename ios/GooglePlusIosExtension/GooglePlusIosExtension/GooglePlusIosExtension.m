@@ -62,32 +62,10 @@ DEFINE_ANE_FUNCTION(shareURL) {
     NSString* text;
     [typeConverter FREGetObject:argv[1] asString:&text];
     
-    uint32_t nativeShareDialog;
-    FREGetObjectAsBool(argv[2], &nativeShareDialog);
+    NSString* imageURL;
+    [typeConverter FREGetObject:argv[2] asString:&imageURL];
     
-    [googlePlusHelpers shareURL:url andPrefillText:text withNativeShareDialog:nativeShareDialog];
-    
-    return NULL;
-}
-
-DEFINE_ANE_FUNCTION(sharePost) {
-    
-    NSString* title;
-    [typeConverter FREGetObject:argv[0] asString:&title];
-    
-    NSString* text;
-    [typeConverter FREGetObject:argv[1] asString:&text];
-    
-    NSString* desc;
-    [typeConverter FREGetObject:argv[2] asString:&desc];
-    
-    NSString* url;
-    [typeConverter FREGetObject:argv[3] asString:&url];
-    
-    uint32_t nativeShareDialog;
-    FREGetObjectAsBool(argv[4], &nativeShareDialog);
-    
-    [googlePlusHelpers sharePostWithTitle:title andText:text andDescription:desc andThumbnailURL:url withNativeShareDialog:nativeShareDialog];
+    [googlePlusHelpers shareURL:url andPrefillText:text withImage:imageURL];
     
     return NULL;
 }
@@ -147,7 +125,6 @@ void GooglePlusContextInitializer(void* extData, const uint8_t* ctxType, FRECont
         MAP_FUNCTION(disconnect, NULL),
         MAP_FUNCTION(isAuthenticated, NULL),
         MAP_FUNCTION(shareURL, NULL),
-        MAP_FUNCTION(sharePost, NULL),
         MAP_FUNCTION(getUserMail, NULL),
         MAP_FUNCTION(getUserID, NULL)
     };

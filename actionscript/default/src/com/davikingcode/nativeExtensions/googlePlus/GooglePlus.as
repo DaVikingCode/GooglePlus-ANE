@@ -1,5 +1,6 @@
 package com.davikingcode.nativeExtensions.googlePlus {
 
+	import flash.display.BitmapData;
 	import flash.events.EventDispatcher;
 	import flash.external.ExtensionContext;
 
@@ -54,20 +55,8 @@ package com.davikingcode.nativeExtensions.googlePlus {
 		* Share an URL. Will dispatch a GooglePlusEvent.POST_SHARED on success or GooglePlusEvent.POST_NOT_SHARED if user canceled.
 		* @param url The URL to share.
 		* @param text Sets the text to prefill user's comment in the share dialog.
-		* @param useNativeShareDialog Use the <b>iOS</b> native share dialog without leaving the app, set it to false to share via the browser.
 		*/
-		public function shareURL(url:String, text:String = "", useNativeShareDialog:Boolean = true):void {
-		}
-
-		/**
-		* Share a post. Will dispatch a GooglePlusEvent.POST_SHARED on success or GooglePlusEvent.POST_NOT_SHARED if user canceled.
-		* @param title The message's title.
-		* @param text Sets the text to prefill user's comment in the share dialog.
-		* @param description The message's description.
-		* @param thumbnailURL An image's URL showed only to the user when writing his message. Not showed on Google+.
-		* @param useNativeShareDialog Use the <b>iOS</b> native share dialog without leaving the app, set it to false to share via the browser.
-		*/
-		public function sharePost(title:String, text:String = "", description:String = "", thumbnailURL:String = "", useNativeShareDialog:Boolean = true):void {
+		public function shareURL(url:String, text:String = "", bitmapData:BitmapData = null):void {
 		}
 
 		/**

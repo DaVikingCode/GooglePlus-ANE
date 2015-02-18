@@ -13,6 +13,9 @@ package {
 	 */
 	public class GooglePlusTest extends Sprite {
 		
+		[Embed(source="logo.jpg")]
+		private const _logoBitmap:Class;
+		
 		private var _googlePlus:GooglePlus;
 		private const _KEY:String = "103213343972-viosupja0di6kact26le0mvf720ab726.apps.googleusercontent.com";
 		
@@ -75,11 +78,8 @@ package {
 		
 		private function _shareRandomPost(mEvt:MouseEvent):void {
 			
-			if (_googlePlus.isAuthenticated()) {
-				
-				_googlePlus.sharePost("Da Viking Code", "Made with the Google+ ANE", "Freelance interactive & game developers", "http://davikingcode.com/images/logo.png");
-				//_googlePlus.shareURL("https://github.com/DaVikingCode/Instagram-ANE", "An awesome free ANE");
-			}
+			if (_googlePlus.isAuthenticated())
+				_googlePlus.shareURL("https://github.com/DaVikingCode/Instagram-ANE", "An awesome ANE", new _logoBitmap().bitmapData);
 		}
 
 		private function _loginSuccessed(gpEvt:GooglePlusEvent):void {

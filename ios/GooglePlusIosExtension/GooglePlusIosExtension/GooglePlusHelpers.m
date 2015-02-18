@@ -56,25 +56,16 @@
         [self dispatchEvent:@"LOGIN_SUCCESSED" withParams:@""];
 }
 
-- (void) shareURL:(NSString *) url andPrefillText:(NSString *) prefillText withNativeShareDialog:(BOOL) useNativeShareDialog {
+- (void) shareURL:(NSString *) url andPrefillText:(NSString *) prefillText withImage:(NSString *) imageUrl {
     
-    id<GPPShareBuilder> shareBuilder = useNativeShareDialog ? [[GPPShare sharedInstance] nativeShareDialog] : [[GPPShare sharedInstance] shareDialog];
+    id<GPPNativeShareBuilder> shareBuilder = [[GPPShare sharedInstance] nativeShareDialog];
     
-    [shareBuilder setURLToShare:[NSURL URLWithString:url]];
-    [shareBuilder setPrefillText:prefillText];
+    //[shareBuilder setURLToShare:[NSURL URLWithString:url]];
+    [shareBuilder setPrefillText:[prefillText stringByAppendingString:url]];
     
-    [shareBuilder open];
-}
-
-- (void) sharePostWithTitle:(NSString *) title andText:(NSString*) text andDescription:(NSString *) description andThumbnailURL:(NSString *) thumbnailURL withNativeShareDialog:(BOOL) useNativeShareDialog {
+    NSURL *fileURL = [NSURL fileURLWithPath: [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:imageUrl]];
     
-    id<GPPShareBuilder> shareBuilder = useNativeShareDialog ? [[GPPShare sharedInstance] nativeShareDialog] : [[GPPShare sharedInstance] shareDialog];
-    
-    [shareBuilder setTitle:title description:description thumbnailURL:[NSURL URLWithString:thumbnailURL]];
-    
-    [shareBuilder setPrefillText:text];
-    
-    [shareBuilder setContentDeepLinkID:@"/sample"];
+    [shareBuilder attachImageData:[NSData dataWithContentsOfURL:fileURL]];
     
     [shareBuilder open];
 }

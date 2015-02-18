@@ -17,6 +17,7 @@ public class ShareURLActivity extends Activity {
 	
 	private String _url;
 	private String _text;
+	private String _imageURL;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class ShareURLActivity extends Activity {
 		
 		 _url = extras.getString(extraPrefix + ".url");
 		_text = extras.getString(extraPrefix + ".text");
+		_imageURL = extras.getString(extraPrefix + ".imageURL");
 		
 		startActivityForResult(getInteractivePostIntent(), REQUEST_CODE_INTERACTIVE_POST);
 	}
@@ -60,9 +62,11 @@ public class ShareURLActivity extends Activity {
 
         PlusShare.Builder builder = new PlusShare.Builder(this);
         
-        builder.setText(_text);
+        builder.setText(_text + _url);
         builder.setType("text/plain");
-        builder.setContentUrl(Uri.parse(_url));
+        
+        if (_imageURL != null && !_imageURL.isEmpty())
+        	builder.setStream(Uri.parse(_imageURL));
 
         return builder.getIntent();
     }

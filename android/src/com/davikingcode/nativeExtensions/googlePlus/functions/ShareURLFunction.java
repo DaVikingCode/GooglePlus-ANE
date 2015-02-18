@@ -13,8 +13,9 @@ public class ShareURLFunction extends BaseFunction {
         
         String url = getStringFromFREObject(args[0]);
         String text = getStringFromFREObject(args[1]);
+        String imageURL = getStringFromFREObject(args[2]);
 
-        GooglePlusExtension.context.launchShareURLActivity(url, text);
+        GooglePlusExtension.context.launchShareURLActivity(url, text, imageURL);
 
         return null;
     }

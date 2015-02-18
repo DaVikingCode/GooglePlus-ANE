@@ -1,14 +1,22 @@
 package com.davikingcode.nativeExtensions.googlePlus {
 
+	import flash.display.BitmapData;
+	import flash.display.JPEGEncoderOptions;
 	import flash.events.EventDispatcher;
 	import flash.events.StatusEvent;
 	import flash.external.ExtensionContext;
+	import flash.filesystem.File;
+	import flash.filesystem.FileMode;
+	import flash.filesystem.FileStream;
+	import flash.utils.ByteArray;
 
 	public class GooglePlus extends EventDispatcher {
 
 		private static var _instance:GooglePlus;
 
 		public var extensionContext:ExtensionContext;
+
+		private var _file:File;
 
 		public static function getInstance():GooglePlus {
 
@@ -47,10 +55,12 @@ package com.davikingcode.nativeExtensions.googlePlus {
 
 				case GooglePlusEvent.POST_SHARED:
 					dispatchEvent(new GooglePlusEvent(GooglePlusEvent.POST_SHARED));
+					_deleteSharedImage();
 					break;
 
 				case GooglePlusEvent.POST_NOT_SHARED:
 					dispatchEvent(new GooglePlusEvent(GooglePlusEvent.POST_NOT_SHARED));
+					_deleteSharedImage();
 					break;
 
 				case GooglePlusEvent.DISCONNECTED:
@@ -79,14 +89,21 @@ package com.davikingcode.nativeExtensions.googlePlus {
 			return extensionContext.call("isAuthenticated") as Boolean;
 		}
 
-		public function shareURL(url:String, text:String = "", useNativeShareDialog:Boolean = true):void {
+		public function shareURL(url:String, text:String = "", bitmapData:BitmapData = null):void {
 
-			extensionContext.call("shareURL", url, text, useNativeShareDialog);
-		}
+			var image:String = "image" + new Date().time + ".jpg";
 
-		public function sharePost(title:String, text:String = "", description:String = "", thumbnailURL:String = "", useNativeShareDialog:Boolean = true):void {
+			if (bitmapData) {
 
-			extensionContext.call("sharePost", title, text, description, thumbnailURL, useNativeShareDialog);
+				_file = File.documentsDirectory.resolvePath(image);
+				var stream:FileStream = new FileStream();
+				stream.open(_file, FileMode.WRITE);
+				var bytes:ByteArray = bitmapData.encode(bitmapData.rect, new JPEGEncoderOptions());
+				stream.writeBytes(bytes, 0, bytes.bytesAvailable);
+				stream.close();
+			}
+
+			extensionContext.call("shareURL", " " + url, text, image);
 		}
 
 		public function getUserMail():String {
@@ -100,6 +117,14 @@ package com.davikingcode.nativeExtensions.googlePlus {
 		}
 
 		public function debuggerHelper():void {
+		}
+
+		private function _deleteSharedImage():void {
+
+			if (_file) {
+				_file.deleteFileAsync();
+				_file = null;
+			}
 		}
 
 	}
