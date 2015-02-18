@@ -1,13 +1,11 @@
 package com.davikingcode.nativeExtensions.googlePlus;
 
-import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.google.android.gms.common.AccountPicker;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
@@ -15,14 +13,12 @@ import com.google.android.gms.plus.Plus;
 public class LoginActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 	
 	static public boolean isConnected = false;
-    static public String userMail;
 	
     static public GoogleApiClient mGoogleApiClient;
     
     static public String extraPrefix = "com.davikingcode.nativeExtensions.googlePlus.LoginActivity";
     
     private static final int REQUEST_CODE_SIGN_IN = 1;
-    private static final int REQUEST_CODE_EMAIL = 2;
     
     private Boolean _extended;
 
@@ -46,8 +42,11 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
    @Override
     public void onConnected(Bundle connectionHint) {
     	
-    	Intent intent = AccountPicker.newChooseAccountIntent(null, null, new String[]{"com.google"}, false, null, null, null, null);
-    	startActivityForResult(intent, REQUEST_CODE_EMAIL);
+	   GooglePlusExtension.context.dispatchStatusEventAsync("LOGIN_SUCCESSED", "");
+	   
+	   isConnected = true;
+	   
+	   finish();
     }
    
    @Override
@@ -66,15 +65,6 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
             	   Log.d("GooglePlusANE", "sign_in_error_status!!");
            }
            
-       } else if (requestCode == REQUEST_CODE_EMAIL) {
-    	   
-    	   userMail = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
-    	   
-    	   isConnected = true;
-    	   
-       		GooglePlusExtension.context.dispatchStatusEventAsync("LOGIN_SUCCESSED", "");
-    	   
-    	   finish();
        }
    }
     

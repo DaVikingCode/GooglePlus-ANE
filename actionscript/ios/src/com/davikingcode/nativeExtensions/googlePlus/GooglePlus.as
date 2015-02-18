@@ -74,11 +74,6 @@ package com.davikingcode.nativeExtensions.googlePlus {
 			extensionContext.call("login", iOSKey, extended);
 		}
 
-		public function signOut():void {
-
-			extensionContext.call("signOut");
-		}
-
 		public function disconnect():void {
 
 			extensionContext.call("disconnect");
@@ -116,7 +111,8 @@ package com.davikingcode.nativeExtensions.googlePlus {
 			return extensionContext.call("getUserID") as String;
 		}
 
-		public function debuggerHelper():void {
+		public function debuggerHelper():String {
+			return "";
 		}
 
 		private function _deleteSharedImage():void {

@@ -11,6 +11,7 @@ import android.util.Log;
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
+import com.adobe.fre.FREWrongThreadException;
 
 public class DebuggerHelperFunction extends BaseFunction implements FREFunction {
 
@@ -39,6 +40,16 @@ public class DebuggerHelperFunction extends BaseFunction implements FREFunction 
 		Log.w("GooglePlusANE", "****");
 		Log.w("GooglePlusANE", "**** Check that the above information matches your setup in Developer Console");
 		Log.w("GooglePlusANE", "****");
+		
+		try {
+        	
+        	return FREObject.newObject(getSHA1CertFingerprint(ctx));
+        	
+        } catch (FREWrongThreadException e) {
+        	
+        	e.printStackTrace();
+        }
+		
 		return null;
 	}
 

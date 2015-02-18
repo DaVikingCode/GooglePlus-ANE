@@ -8,8 +8,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 
 public class DisconnectActivity extends Activity implements GoogleApiClient.ConnectionCallbacks {
-	
-	static public String extraPrefix = "com.davikingcode.nativeExtensions.googlePlus.DisconnectActivity";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -17,14 +15,7 @@ public class DisconnectActivity extends Activity implements GoogleApiClient.Conn
 
 		LoginActivity.mGoogleApiClient.registerConnectionCallbacks(this);
 		
-		Bundle extras = this.getIntent().getExtras();
-		
-		boolean signOut = extras.getBoolean(extraPrefix + ".signOut");
-		
-		if (signOut)
-			Plus.AccountApi.revokeAccessAndDisconnect(LoginActivity.mGoogleApiClient);
-		else
-			Plus.AccountApi.clearDefaultAccount(LoginActivity.mGoogleApiClient);
+		Plus.AccountApi.revokeAccessAndDisconnect(LoginActivity.mGoogleApiClient);
 	}
 
 	@Override

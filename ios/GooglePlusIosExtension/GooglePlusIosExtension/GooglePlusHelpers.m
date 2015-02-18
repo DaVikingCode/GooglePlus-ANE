@@ -78,13 +78,6 @@
         [self dispatchEvent:@"POST_NOT_SHARED" withParams:@""];
 }
 
-- (void) signOut {
-    
-    [[GPPSignIn sharedInstance] signOut];
-    
-    [self dispatchEvent:@"DISCONNECTED" withParams:@""];
-}
-
 - (void) disconnect {
     
     [[GPPSignIn sharedInstance] disconnect];

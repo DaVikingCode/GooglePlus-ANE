@@ -31,13 +31,6 @@ DEFINE_ANE_FUNCTION(login) {
     return NULL;
 }
 
-DEFINE_ANE_FUNCTION(signOut) {
-    
-    [googlePlusHelpers signOut];
-    
-    return NULL;
-}
-
 DEFINE_ANE_FUNCTION(disconnect) {
     
     [googlePlusHelpers disconnect];
@@ -120,7 +113,6 @@ void GooglePlusContextInitializer(void* extData, const uint8_t* ctxType, FRECont
     
     static FRENamedFunction functionMap[] = {
         MAP_FUNCTION(login, NULL),
-        MAP_FUNCTION(signOut, NULL),
         MAP_FUNCTION(disconnect, NULL),
         MAP_FUNCTION(isAuthenticated, NULL),
         MAP_FUNCTION(share, NULL),

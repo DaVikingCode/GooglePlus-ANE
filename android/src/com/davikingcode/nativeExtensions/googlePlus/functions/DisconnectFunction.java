@@ -12,7 +12,7 @@ public class DisconnectFunction extends BaseFunction implements FREFunction {
 
         super.call(context, args);
         
-        GooglePlusExtension.context.launchDisconnectActivity(false);
+        GooglePlusExtension.context.launchDisconnectActivity();
 
         return null;
     }

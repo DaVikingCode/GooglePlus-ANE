@@ -19,7 +19,6 @@
 - (id) initWithContext:(FREContext) context;
 
 - (void) loginWithKey:(NSString *) key andExtendedPermissions:(BOOL) extended;
-- (void) signOut;
 - (void) disconnect;
 - (BOOL) isAuthenticated;
 

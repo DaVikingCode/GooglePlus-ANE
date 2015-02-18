@@ -14,7 +14,6 @@ import com.davikingcode.nativeExtensions.googlePlus.functions.GetUserMailFunctio
 import com.davikingcode.nativeExtensions.googlePlus.functions.IsAuthenticatedFunction;
 import com.davikingcode.nativeExtensions.googlePlus.functions.LoginFunction;
 import com.davikingcode.nativeExtensions.googlePlus.functions.ShareFunction;
-import com.davikingcode.nativeExtensions.googlePlus.functions.SignOutFunction;
 
 public class GooglePlusExtensionContext extends FREContext {
 
@@ -32,7 +31,6 @@ public class GooglePlusExtensionContext extends FREContext {
         functionMap.put("debuggerHelper", new DebuggerHelperFunction());
         functionMap.put("share", new ShareFunction());
         functionMap.put("disconnect", new DisconnectFunction());
-        functionMap.put("signOut", new SignOutFunction());
         functionMap.put("getUserMail", new GetUserMailFunction());
         functionMap.put("getUserID", new GetUserIDFunction());
 
@@ -59,11 +57,9 @@ public class GooglePlusExtensionContext extends FREContext {
         getActivity().startActivity(i);
     }
     
-    public void launchDisconnectActivity(boolean signOut) {
+    public void launchDisconnectActivity() {
 
         Intent i = new Intent(getActivity().getApplicationContext(), DisconnectActivity.class);
-        
-        i.putExtra(DisconnectActivity.extraPrefix + ".signOut", signOut);
 
         getActivity().startActivity(i);
     }

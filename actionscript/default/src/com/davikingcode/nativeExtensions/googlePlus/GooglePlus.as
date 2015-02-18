@@ -25,23 +25,16 @@ package com.davikingcode.nativeExtensions.googlePlus {
 		}
 
 		/**
-		* Login to the Google+ account via its app. If the user doesn't have the Google+ app, the login is done via the Google+ website.
-		* The user is redirected to its app if the login process is cancelled or completed.
-		* @param iOSKey The client ID of the app from the Google APIs console <b>(for iOS only)</b>. Not considered by Android.
+		* Login to the Google+ account user. On <i>iOS</i> If the user doesn't have the Google+ app, the login is done via the Google+ website. Then the 
+		* user is redirected to its app if the login process is cancelled or completed. On <i>Android</i> it opens a popin.
+		* @param iOSKey The client ID of the app from the Google APIs console <b>(for iOS only)</b>. Not considered on Android.
 		* @param extended If true we can read user's mail, user's ID and know who you are on Google+.
 		*/
 		public function login(iOSKey:String, extended:Boolean = false):void {
 		}
 
 		/**
-		* Removes the OAuth 2.0 token from the keychain, dispatch <code>GooglePlusEvent.DISCONNECTED</code>.
-		*/
-		public function signOut():void {
-		}
-
-		/**
 		* Disconnects the user from the app and revokes previous authentication. If the operation succeeds, the OAuth 2.0 token is also removed from keychain.
-		* The token is needed to disconnect so do not call signOut if disconnect is to be called.
 		* Dispatch <code>GooglePlusEvent.DISCONNECTED</code> on success.
 		*/
 		public function disconnect():void {
@@ -61,12 +54,15 @@ package com.davikingcode.nativeExtensions.googlePlus {
 		}
 
 		/**
-		* Grab the user mail, only works if you set <i>shouldFetchGoogleUserEmail</i> to true when calling <code>login</code> method.
+		* Grab the user mail, only works if you logged with extended set to true.
 		*/
 		public function getUserMail():String {
 			return "";
 		}
 
+		/**
+		* Get the user id, only works if you logged with extended set to true.
+		*/
 		public function getUserID():String {
 			return "";
 		}
@@ -74,8 +70,10 @@ package com.davikingcode.nativeExtensions.googlePlus {
 		/**
 		* <b>Android only!</b> Print into the <a href="http://developer.android.com/tools/debugging/ddms.html">DDMS</a> or <a href="http://developer.android.com/tools/help/monitor.html">Device Monitor</a> the <b>SHA1 key</b> and the 
 		* <b>package</b> that must be set inside the <a href="https://console.developers.google.com/project">Google+ console</a>.
+		* @return a String that contains your <b>SHA1</b> key!
 		*/
-		public function debuggerHelper():void {
+		public function debuggerHelper():String {
+			return "";
 		}
 	}
 }

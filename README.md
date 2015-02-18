@@ -1,9 +1,10 @@
-How to grab Android SHA1 key from .p12?
-=======================================
-- Open Terminal or Command line and navigate to where your .p12 key is.
-- Type in: `keytool -v -list -keystore mycert.p12 -storetype pkcs12` where mycert.p12 is the filename of your .p12 key.
-- Enter keystore password (the one you used when exported .p12 key).
-- Copy sha1 fingerprint signature bytes text
+Google+ ANE
+===========
 
-https://developers.google.com/+/mobile/android/share/interactive-post#configure_the_share_dialog  
-https://developers.google.com/+/mobile/ios/share/interactive-post#configure_your_share_dialog
+**The ANE is not included inside this repository. To have the ANE and the right to use it, you must [buy a license](https://gumroad.com/l/GooglePlus-ANE)! Please check the [LICENSE.txt](LICENSE.txt) file.**  
+
+Public source code access
+-------------------------
+The source code of this ANE is accessible to everyone. We learnt so much from the open source community and devoted people, that’s our way to give something back. People who bought the ANE will find instructions, ANE, SWC, and the build files. So you may recompile the ANE if needed.
+
+[API](http://davikingcode.com/products/GooglePlus-ANE/docs/index.html).

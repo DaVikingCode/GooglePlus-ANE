@@ -73,7 +73,7 @@ package {
 			if (!_googlePlus.isAuthenticated())
 				_googlePlus.login(_KEY);
 			else
-				_googlePlus.signOut();
+				_googlePlus.disconnect();
 		}
 		
 		private function _shareRandomPost(mEvt:MouseEvent):void {

@@ -4,6 +4,7 @@ import com.adobe.fre.FREContext;
 import com.adobe.fre.FREObject;
 import com.adobe.fre.FREWrongThreadException;
 import com.davikingcode.nativeExtensions.googlePlus.LoginActivity;
+import com.google.android.gms.plus.Plus;
 
 public class GetUserMailFunction extends BaseFunction {
 	
@@ -14,7 +15,7 @@ public class GetUserMailFunction extends BaseFunction {
         
         try {
         	
-        	return FREObject.newObject(LoginActivity.userMail);
+        	return FREObject.newObject(Plus.AccountApi.getAccountName(LoginActivity.mGoogleApiClient));
         	
         } catch (FREWrongThreadException e) {
         	
