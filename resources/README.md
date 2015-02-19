@@ -1,1 +1,0 @@
-[Google+ branding guidelines](https://developers.google.com/+/branding-guidelines)
