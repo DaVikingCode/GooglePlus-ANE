@@ -69,13 +69,14 @@
     [shareBuilder open];
 }
 
-- (void)finishedSharing:(BOOL)shared {
+- (void)finishedSharingWithError:(NSError *)error {
     
-    if (shared)
-        [self dispatchEvent:@"POST_SHARED" withParams:@""];
-    
-    else
+    if (error) {
+        NSLog(@"%@", error);
         [self dispatchEvent:@"POST_NOT_SHARED" withParams:@""];
+        
+    } else
+        [self dispatchEvent:@"POST_SHARED" withParams:@""];
 }
 
 - (void) disconnect {
