@@ -77,8 +77,9 @@
     <!-- <softKeyboardBehavior></softKeyboardBehavior> -->
     <!-- Display Resolution for the app (either "standard" or "high"). Optional, OSX-only. Default "standard" -->
     <!-- <requestedDisplayResolution></requestedDisplayResolution> -->
+    <aspectRatio>portrait</aspectRatio>
     <fullScreen>false</fullScreen>
-    <autoOrients>true</autoOrients>
+    <autoOrients>false</autoOrients>
     <visible>true</visible>
     <renderMode>auto</renderMode>
   </initialWindow>
@@ -245,7 +246,6 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
     <application android:enabled="true">
       <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
       <activity android:excludeFromRecents="false">
